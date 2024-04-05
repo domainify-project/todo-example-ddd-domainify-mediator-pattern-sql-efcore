@@ -1,0 +1,43 @@
+﻿@Presentation.WebAPI_HostAddress = https://localhost:7050
+
+GET {{Presentation.WebAPI_HostAddress}}/v1/booklets
+
+###
+
+POST {{Presentation.WebAPI_HostAddress}}/v1/booklets
+Content-Type: application/json
+
+{
+  //CreateNewBooklet
+}
+
+###
+
+GET {{Presentation.WebAPI_HostAddress}}/v1/booklets/string
+
+###
+
+DELETE {{Presentation.WebAPI_HostAddress}}/v1/booklets/string
+
+###
+
+PATCH {{Presentation.WebAPI_HostAddress}}/v1/booklets/Archive/string
+
+###
+
+PATCH {{Presentation.WebAPI_HostAddress}}/v1/booklets/EditBookletTitle
+Content-Type: application/json
+
+{
+  //EditBookletTitle
+}
+
+###
+
+PATCH {{Presentation.WebAPI_HostAddress}}/v1/booklets/Restore/string
+
+###
+
+GET {{Presentation.WebAPI_HostAddress}}/v1/booklets
+
+###

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SprintRepository\**" />
+    <Compile Remove="TaskRepository\**" />
+    <EmbeddedResource Remove="SprintRepository\**" />
+    <EmbeddedResource Remove="TaskRepository\**" />
+    <None Remove="SprintRepository\**" />
+    <None Remove="TaskRepository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Domainify" Version="1.0.0.8" />
+    <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>
