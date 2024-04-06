@@ -17,25 +17,25 @@ namespace Presentation.Configuration
             var inMemoryDatabaseSettings = new InMemoryDatabaseSettings();
             configuration.GetSection("InMemoryDatabaseSettings").Bind(inMemoryDatabaseSettings);
 
-            var mongoDBSettings = new MongoDBSettings();
-            configuration.GetSection("MongoDBSettings").Bind(mongoDBSettings);
+            var sqlServerSettings = new SqlServerSettings();
+            configuration.GetSection("SqlServerSettings").Bind(sqlServerSettings);
 
             services.ConfigureApplicationServices(
                 databaseSettings: databaseSettings,
                 inMemoryDatabaseSettings: inMemoryDatabaseSettings,
-                mongoDBSettings: mongoDBSettings);
+                sqlServerSettings: sqlServerSettings);
         }
 
         public static void ConfigureApplicationServices(
             this IServiceCollection services,
             DatabaseSettings databaseSettings,
-            MongoDBSettings mongoDBSettings,
+            SqlServerSettings sqlServerSettings,
             InMemoryDatabaseSettings? inMemoryDatabaseSettings = null)
         {
             //-- Application
             services.AddApplicationServices(
                 databaseSettings,
-                mongoDBSettings,
+                sqlServerSettings,
                 inMemoryDatabaseSettings);
         }
 

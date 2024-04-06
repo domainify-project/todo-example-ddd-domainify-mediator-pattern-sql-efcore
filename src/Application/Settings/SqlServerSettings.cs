@@ -1,8 +1,7 @@
 ﻿namespace Application
 {
-    public class MongoDBSettings
+    public class SqlServerSettings
     {
         public string ConnectionString { get; set; } = null!;
-        public string DatabaseName { get; set; } = null!;
     }
 }

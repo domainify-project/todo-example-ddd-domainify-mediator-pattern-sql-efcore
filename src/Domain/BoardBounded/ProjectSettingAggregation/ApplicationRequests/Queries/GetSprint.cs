@@ -4,7 +4,7 @@ using MediatR;
 namespace Domain.ProjectSettingAggregation
 {
     public class GetSprint :
-        QueryItemRequestById<Sprint, string, Sprint?>
+        QueryItemRequestById<Sprint, string, SprintViewModel?>
     {
         public GetSprint(string id, bool includeDeleted = false) : base(id)
         {

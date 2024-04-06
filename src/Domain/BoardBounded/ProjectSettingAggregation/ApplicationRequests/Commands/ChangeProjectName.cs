@@ -9,10 +9,10 @@ namespace Domain.ProjectSettingAggregation
         [BindTo(typeof(Project), nameof(Project.Name))]
         public string Name { get; private set; }
  
-        public ChangeProjectName(string id, string title) 
+        public ChangeProjectName(string id, string name) 
             : base(id)
         {
-            Name = title.Trim();
+            Name = name.Trim();
             ValidationState.Validate();
         }
 

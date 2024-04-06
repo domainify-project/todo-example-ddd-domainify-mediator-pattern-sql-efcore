@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.WebAPI", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.Configuration", "src\Presentation\Configuration\Presentation.Configuration.csproj", "{D1954CB7-7306-40E7-AFBD-F3297FAC9A75}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.EFCore", "src\Persistence\MongoDb\Persistence.EFCore.csproj", "{268E2019-56B7-424F-BEA8-387426A21924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.EFCore", "src\Persistence\EFCore\Persistence.EFCore.csproj", "{838D1012-CA07-4216-9257-077CF2AB4A96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,14 +63,14 @@ Global
 		{D1954CB7-7306-40E7-AFBD-F3297FAC9A75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1954CB7-7306-40E7-AFBD-F3297FAC9A75}.Release|ARM32.ActiveCfg = Release|Any CPU
 		{D1954CB7-7306-40E7-AFBD-F3297FAC9A75}.Release|ARM32.Build.0 = Release|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Debug|ARM32.ActiveCfg = Debug|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Debug|ARM32.Build.0 = Debug|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Release|Any CPU.Build.0 = Release|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Release|ARM32.ActiveCfg = Release|Any CPU
-		{268E2019-56B7-424F-BEA8-387426A21924}.Release|ARM32.Build.0 = Release|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Debug|ARM32.Build.0 = Debug|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{838D1012-CA07-4216-9257-077CF2AB4A96}.Release|ARM32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

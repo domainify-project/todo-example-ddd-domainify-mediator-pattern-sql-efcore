@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Domainify.Domain;
 using Contract;
+using Persistence;
+using Domain.TaskAggregation;
 
 namespace Application
 {
@@ -16,7 +18,7 @@ namespace Application
             _mediator = mediator;
             _transaction = transaction;
         }
-        public async Task<Guid> Process(AddNewTask request)
+        public async Task<string> Process(AddTask request)
         {
             var id = await _mediator.Send(request);
             await _transaction.SaveChangesAsync();
@@ -27,7 +29,7 @@ namespace Application
             await _mediator.Send(request);
             await _transaction.SaveChangesAsync(concurrencyCheck: true);
         }
-        public async System.Threading.Tasks.Task Process(ArchiveTask request)
+        public async System.Threading.Tasks.Task Process(DeleteTask request)
         {
             await _mediator.Send(request);
             await _transaction.SaveChangesAsync(concurrencyCheck: true);
@@ -47,7 +49,7 @@ namespace Application
             return await _mediator.Send(request);
         }
 
-        public async Task<PaginatedViewModel<TaskViewModel>> Process(GetTaskList request)
+        public async Task<PaginatedList<TaskViewModel>> Process(GetTasksList request)
         {
             return await _mediator.Send(request);
         }

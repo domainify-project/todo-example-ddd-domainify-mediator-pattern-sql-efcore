@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Domain.TaskAggregation
 {
-    public class GetTaskList :
+    public class GetTasksList :
         QueryListRequest<Task, PaginatedList<TaskViewModel>>
     {
         [Required]
@@ -13,11 +13,11 @@ namespace Domain.TaskAggregation
         public TaskStatus? Status { get; set; }
         public string? DescriptionSearchKey { get; set; }
 
-        public GetTaskList()
+        public GetTasksList()
         {
             ValidationState.Validate();
         }
-        public GetTaskList SetProjectId(Guid value)
+        public GetTasksList SetProjectId(Guid value)
         {
             ProjectId = value;
             return this;

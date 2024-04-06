@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Controllers\Projects.cs~RFd3dcf32.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Domainify" Version="1.0.0.8" />
     <PackageReference Include="Domainify.AspMvc" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.2" />
@@ -28,10 +24,6 @@
     <ProjectReference Include="..\..\Contract\Contract.csproj" />
     <ProjectReference Include="..\..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Configuration\Presentation.Configuration.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ namespace Domain.ProjectSettingAggregation
     {
         public double Version { get; set; }
 
-        [MinLengthShouldBe(3)]
+        [MinLengthShouldBe(1)]
         [MaxLengthShouldBe(50)]
         [StringLength(50)]
         [Required(AllowEmptyStrings = false)]
@@ -27,7 +27,8 @@ namespace Domain.ProjectSettingAggregation
 
         public Project ()
         {
-            Version = 1.0;
+            // The version field is used for persisting in a nosql database like MongoDB
+            //Version = 1.0;
         }
 
         public static Project NewInstance()

@@ -1,9 +1,7 @@
-﻿using Domain.ProjectSettingAggregation;
-using Domain.Properties;
+﻿using Domain.Properties;
 using Domainify;
 using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 
 namespace Domain.TaskAggregation
 {
@@ -24,7 +22,8 @@ namespace Domain.TaskAggregation
 
         public Task()
         {
-            Version = 1.0;
+            // The version field is used for persisting in a nosql database like MongoDB
+            //Version = 1.0;
         }
         public static Task NewInstance(
             string projectId,
