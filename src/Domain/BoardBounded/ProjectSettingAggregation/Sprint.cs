@@ -6,7 +6,7 @@ namespace Domain.ProjectSettingAggregation
 {
     public class Sprint : Entity<Sprint, string>
     {
-        [MinLengthShouldBe(3)]
+        [MinLengthShouldBe(1)]
         [MaxLengthShouldBe(50)]
         [StringLength(50)]
         [Required(AllowEmptyStrings = false)]
@@ -37,13 +37,13 @@ namespace Domain.ProjectSettingAggregation
             return this;
         }
 
-        public Sprint SetStartDate(DateTime value)
+        public Sprint SetStartDate(DateTime? value)
         {
             StartDate = value;
 
             return this;
         }
-        public Sprint SetEndDate(DateTime value)
+        public Sprint SetEndDate(DateTime? value)
         {
             EndDate = value;
 

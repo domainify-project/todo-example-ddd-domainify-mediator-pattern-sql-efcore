@@ -4,7 +4,7 @@ using MediatR;
 namespace Domain.ProjectSettingAggregation
 {
     public class DefineSprint
-        : RequestToCreate<Sprint, (string bookletId, string id)?>
+        : RequestToCreate<Sprint, string>
     {
         [BindTo(typeof(Project), nameof(Project.Id))]
         public string ProjectId { get; private set; } = string.Empty;

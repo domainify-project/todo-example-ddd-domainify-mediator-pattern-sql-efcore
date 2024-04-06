@@ -24,6 +24,5 @@ namespace Domain.ProjectSettingAggregation
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
-
     }
 }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Domain.TaskAggregation
 {
-    public class AddNewTask
+    public class AddTask
         : RequestToCreate<Task, string>
     {
         public string ProjectId { get; private set; }
@@ -14,7 +14,7 @@ namespace Domain.TaskAggregation
         public string? SprintId { get; private set; }
         public TaskStatus Status { get; private set; } = Task.GetTaskStatusDefaultValue();
 
-        public AddNewTask(string projectId,
+        public AddTask(string projectId,
             string description, string? sprintId = null)
         {
             ProjectId = projectId;

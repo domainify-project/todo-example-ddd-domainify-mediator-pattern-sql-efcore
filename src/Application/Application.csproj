@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Domainify" Version="1.0.0.8" />
-    <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Contract\Contract.csproj" />
-    <ProjectReference Include="..\Persistence\MongoDb\Persistence.EFCore.csproj" />
+    <ProjectReference Include="..\Persistence\EFCore\Persistence.EFCore.csproj" />
   </ItemGroup>
 
 </Project>

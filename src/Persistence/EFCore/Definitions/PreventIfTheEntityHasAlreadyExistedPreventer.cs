@@ -1,7 +1,5 @@
 ﻿using Domainify;
 using Domainify.Domain;
-using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 
 namespace Persistence
 {
@@ -9,19 +7,20 @@ namespace Persistence
         : LogicalPreventer
         where TEntity : BaseEntity<TEntity>
     {
-        private IMongoCollection<TDocument> _collection;
-        private FilterDefinition<TDocument> _filter;
+        //private IMongoCollection<TDocument> _collection;
+        //private FilterDefinition<TDocument> _filter;
 
-        public PreventIfTheEntityHasAlreadyExistedPreventer(
-            IMongoCollection<TDocument> collection, FilterDefinition<TDocument> filter)
-        {
-            _collection = collection;
-            _filter = filter;
-        }
+        //public PreventIfTheEntityHasAlreadyExistedPreventer(
+        //    IMongoCollection<TDocument> collection, FilterDefinition<TDocument> filter)
+        //{
+        //    _collection = collection;
+        //    _filter = filter;
+        //}
 
         public override async Task<bool> ResolveAsync()
         {
-            return await _collection.Find(_filter).AnyAsync();
+            throw new NotImplementedException();
+            //return await _collection.Find(_filter).AnyAsync();
         }
 
         public override IIssue? GetIssue()

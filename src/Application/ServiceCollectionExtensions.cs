@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Driver;
+﻿using Contract;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using Persistence;
 
 namespace Application
 {
@@ -8,19 +12,22 @@ namespace Application
         public static void AddApplicationServices(
             this IServiceCollection services,
             DatabaseSettings databaseSettings,
-            MongoDBSettings mongoDBSettings,
+            SqlServerSettings sqlServerSettings,
             InMemoryDatabaseSettings? inMemoryDatabaseSettings = null)
         {
             services.ConfigureDataStore(
                 databaseSettings,
-                mongoDBSettings,
+                sqlServerSettings,
                 inMemoryDatabaseSettings);
 
             // MediatR Registrations
-   
+            services.AddMediatR(typeof(ProjectSettingService));
+            services.AddMediatR(typeof(Persistence.ProjectStore.DefineProjectHandler));
+            services.AddMediatR(typeof(Domain.ProjectSettingAggregation.DefineProject));
 
             // Application Services
-      
+            services.AddScoped<IProjectSettingService, ProjectSettingService>();
+            services.AddScoped<ITaskService, TaskService>();
 
             // Infrastructure Services
         }
@@ -28,17 +35,26 @@ namespace Application
         private static void ConfigureDataStore(
             this IServiceCollection services,
             DatabaseSettings databaseSettings,
-            MongoDBSettings mongoDBSettings,
+            SqlServerSettings sqlServerSettings,
             InMemoryDatabaseSettings? inMemoryDatabaseSettings = null)
         {
+            services.AddScoped<IDbTransaction, TodoDbTransaction>();
+
             if (databaseSettings.IsInMemory)
             {
+                services.AddDbContext<TodoDbContext>(options =>
+                   options.UseInMemoryDatabase(databaseName: inMemoryDatabaseSettings!.DatabaseName)
+                   .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning)),
+                   ServiceLifetime.Scoped);
             }
             else
             {
-                var client = new MongoClient(mongoDBSettings.ConnectionString);
-                IMongoDatabase database = client.GetDatabase(mongoDBSettings.DatabaseName);
-                services.AddSingleton(database);
+                var assembly = typeof(TodoDbContext).Assembly.GetName().Name;
+                services.AddDbContext<TodoDbContext>(options =>
+                   options.UseSqlServer(
+                       sqlServerSettings!.ConnectionString!,
+                       b => b.MigrationsAssembly(assembly)),
+                   ServiceLifetime.Scoped);
             }
 
             new DatabaseInitialization(services).Initialize();
