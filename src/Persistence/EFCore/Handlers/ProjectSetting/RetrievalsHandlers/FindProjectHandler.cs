@@ -1,4 +1,5 @@
 ﻿using Domain.ProjectSettingAggregation;
+using Domainify.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,13 @@ namespace Persistence.ProjectStore
                 query = query.Include(p => p.Sprints);
 
             var retrievedItem = await query.FirstOrDefaultAsync();
+
+            if(retrievedItem == null && request.PreventIfNoEntityWasFound)
+            {
+                await new LogicalState().AddFault(
+                    new NoEntityWasFound(typeof(Project).Name))
+                    .AssesstAsync();
+            }
 
             return retrievedItem?.ToEntity();
         }

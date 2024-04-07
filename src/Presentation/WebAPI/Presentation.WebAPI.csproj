@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Domainify" Version="1.0.0.8" />
-    <PackageReference Include="Domainify.AspMvc" Version="1.0.0" />
+    <PackageReference Include="Domainify" Version="1.0.1" />
+    <PackageReference Include="Domainify.AspMvc" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>

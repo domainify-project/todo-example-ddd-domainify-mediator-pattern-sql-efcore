@@ -10,8 +10,8 @@ namespace Domain.ProjectSettingAggregation
         public GetProject(string id, bool withSprints = false, bool includeDeleted = false) : base(id)
         {
             WithSprints = withSprints;
-            //TrackingMode = true;
-            //PreventIfNoEntityWasFound = true;
+            TrackingMode = true;
+            PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;
         }
         public override async Task ResolveAsync(IMediator mediator)

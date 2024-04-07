@@ -4,7 +4,7 @@ using Domain.Properties;
 
 namespace Domain.ProjectSettingAggregation
 {
-    public class StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths : InvariantIssue
+    public class StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths : InvariantFault
     {
         public StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths(
             string description = "") : base(outerDescription: description,

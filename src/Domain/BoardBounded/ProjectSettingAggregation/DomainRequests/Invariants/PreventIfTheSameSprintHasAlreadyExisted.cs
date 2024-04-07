@@ -15,7 +15,7 @@ namespace Domain.ProjectSettingAggregation
             Sprint = sprint;
             ProjectId = projectId;
         }
-        public override IIssue? GetIssue()
+        public override IFault? GetFault()
         {
             return new AnEntityWithTheseUniquenessConditionsHasAlreadyExisted(
                     typeof(Sprint).Name, Description);

@@ -4,7 +4,7 @@ using Domainify.Domain;
 
 namespace Domain.ProjectSettingAggregation
 {
-    internal class ProjectHasSomeSprints : InvariantIssue
+    internal class ProjectHasSomeSprints : InvariantFault
     {
         public ProjectHasSomeSprints(
             string description = "") :

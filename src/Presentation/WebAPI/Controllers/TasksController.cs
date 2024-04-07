@@ -18,7 +18,7 @@ namespace Presentation.WebAPI
             _service = service;
         }
 
-        [HttpGet($"/v1/{nameof(ProjectSettingController)}/{{{nameof(GetTasksList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1/{nameof(ProjectsController)}/{{{nameof(GetTasksList.ProjectId)}}}/[controller]")]
         public async Task<ActionResult<PaginatedList<TaskViewModel>>> GetList(
             Guid projectId,
             Guid? sprintId = null,
@@ -33,7 +33,7 @@ namespace Presentation.WebAPI
 
             return await _service.Process(request);
         }
-        [HttpGet($"/v1.1/{nameof(ProjectSettingController)}/{{{nameof(GetTasksList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1.1/{nameof(ProjectsController)}/{{{nameof(GetTasksList.ProjectId)}}}/[controller]")]
         public async Task<ActionResult<PaginatedList<TaskViewModel>>> GetList(
             Guid projectId,
             Guid? sprintId = null,

@@ -12,7 +12,7 @@ namespace Domain.ProjectSettingAggregation
         {
             Project = project;
         }
-        public override IIssue? GetIssue()
+        public override IFault? GetFault()
         {
             return new AnEntityWithTheseUniquenessConditionsHasAlreadyExisted(
                     typeof(Project).Name, Description);

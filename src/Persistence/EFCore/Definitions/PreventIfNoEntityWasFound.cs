@@ -21,7 +21,7 @@ namespace Persistence
             return !await _query.AnyAsync();
         }
 
-        public override IIssue? GetIssue()
+        public override IFault? GetFault()
         {
             return new NoEntityWasFound(typeof(TEntity).Name, Description);
         }

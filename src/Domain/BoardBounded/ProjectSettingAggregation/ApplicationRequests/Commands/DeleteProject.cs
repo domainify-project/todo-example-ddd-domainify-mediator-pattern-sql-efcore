@@ -14,12 +14,13 @@ namespace Domain.ProjectSettingAggregation
         public override async Task<Project> ResolveAndGetEntityAsync(
             IMediator mediator)
         {
+            var project = (await mediator.Send(
+                new FindProject(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
+
             InvariantState.AddAnInvariantRequest(new PreventIfProjectHasSomeSprints(id: Id));
             InvariantState.AddAnInvariantRequest(new PreventIfProjectHasSomeTasks(id: Id));
             await InvariantState.AssestAsync(mediator);
 
-            var project = (await mediator.Send(
-                new FindProject(Id, includeDeleted: true)))!;
             await base.ResolveAsync(mediator, project);
             return project;
         }

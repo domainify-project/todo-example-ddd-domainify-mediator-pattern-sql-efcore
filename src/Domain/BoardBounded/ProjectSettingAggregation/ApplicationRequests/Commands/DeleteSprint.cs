@@ -22,7 +22,7 @@ namespace Domain.ProjectSettingAggregation
             await InvariantState.AssestAsync(mediator);
 
             var sprint = (await mediator.Send(
-                new FindSprint(Id, includeDeleted: true)))!;
+                new FindSprint(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
             await base.ResolveAsync(mediator, sprint);
 
             if (ToDeleteAllTaskStatus)

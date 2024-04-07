@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Persistence.ProjectStore
 {
     internal class PreventIfTheSamProjectHasAlreadyExistedHandler :
@@ -24,7 +23,7 @@ namespace Persistence.ProjectStore
             await request.ResolveAsync(_mediator);
 
             var query = _dbContext.Projects
-                .Where(p => p.Name == request.Project.Name);
+                .Where(p => !p.IsDeleted && p.Name == request.Project.Name);
 
             if (!string.IsNullOrEmpty(request.Project.Id))
                 query = query.Where(p => p.Id != new Guid(request.Project.Id));

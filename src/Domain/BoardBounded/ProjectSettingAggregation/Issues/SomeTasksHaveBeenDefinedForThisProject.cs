@@ -4,7 +4,7 @@ using Domain.Properties;
 
 namespace Domain.ProjectSettingAggregation
 {
-    internal class SomeTasksHaveBeenDefinedForThisProject : InvariantIssue
+    internal class SomeTasksHaveBeenDefinedForThisProject : InvariantFault
     {
         public SomeTasksHaveBeenDefinedForThisProject(
             string description = "")

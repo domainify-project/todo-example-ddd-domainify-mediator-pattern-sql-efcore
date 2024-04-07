@@ -19,7 +19,7 @@ namespace Domain.ProjectSettingAggregation
         public override async Task<Sprint> ResolveAndGetEntityAsync(
             IMediator mediator)
         {
-            var sprint = (await mediator.Send(new FindSprint(id: Id)))!;
+            var sprint = (await mediator.Send(new FindSprint(id: Id, preventIfNoEntityWasFound: true)))!;
             sprint.SetName(Name);
 
             InvariantState.AddAnInvariantRequest(
