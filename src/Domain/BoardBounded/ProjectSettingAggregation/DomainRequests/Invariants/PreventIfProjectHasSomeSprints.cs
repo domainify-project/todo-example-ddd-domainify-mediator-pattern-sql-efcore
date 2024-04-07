@@ -11,7 +11,7 @@ namespace Domain.ProjectSettingAggregation
         {
         }
 
-        public override IIssue? GetIssue()
+        public override IFault? GetFault()
         {
             return new ProjectHasSomeSprints();
         }

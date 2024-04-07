@@ -4,26 +4,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.ProjectStore
 {
-    public class DefineProjectHandler :
-        IRequestHandler<DefineProject, string>
+    public class DeleteProjectHandler :
+        IRequestHandler<DeleteProject>
     {
         private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
-        public DefineProjectHandler(
+        public DeleteProjectHandler(
             IMediator mediator, TodoDbContext dbContext)
         {
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public async Task<string> Handle(
-            DefineProject request,
+
+        public async Task<Unit> Handle(
+            DeleteProject request,
             CancellationToken cancellationToken)
         {
             var preparedEntity = await request.ResolveAndGetEntityAsync(_mediator);
-            var newItem  = ProjectModel.InstanceOf(preparedEntity);
-            _dbContext.Projects.Add(newItem);
- 
-            return newItem.Id.ToString();
+
+            var itemToModify = await _dbContext.Projects
+                .FirstAsync(p => p.Id == new Guid(request.Id));
+
+            if (itemToModify != null)
+                itemToModify.IsDeleted = true;
+
+            return new Unit();
         }
     }
-} 
+}

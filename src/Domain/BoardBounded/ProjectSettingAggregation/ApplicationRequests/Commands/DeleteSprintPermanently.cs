@@ -18,10 +18,11 @@ namespace Domain.ProjectSettingAggregation
 
         public override async Task<Sprint> ResolveAndGetEntityAsync(IMediator mediator)
         {
+            var sprint = (await mediator.Send(
+                new FindSprint(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
+
             await InvariantState.AssestAsync(mediator);
 
-            var sprint = (await mediator.Send(
-                new FindSprint(Id, includeDeleted: true)))!;
             await base.ResolveAsync(mediator, sprint);
 
             return sprint;

@@ -8,11 +8,11 @@ namespace Presentation.WebAPI
 {
     [Route("v1/[controller]")]
     [ApiController]
-    public class ProjectSettingController : ApiController
+    public class ProjectsController : ApiController
     {
         private readonly IProjectSettingService _projectSettingService;
         private readonly ITaskService _taskService;
-        public ProjectSettingController(
+        public ProjectsController(
             IProjectSettingService projectService,
             ITaskService taskService)
         {
@@ -47,16 +47,19 @@ namespace Presentation.WebAPI
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProjectViewModel?>> Get(string id)
+        public async Task<ActionResult<ProjectViewModel?>> Get(
+            string id, bool? withIndices = null)
         {
-            return await View(() => _projectSettingService.Process(new GetProject(id)));
+            var request = GetRequest<GetProject>();
+            request.SetId(id);
+
+            return await _projectSettingService.Process(request);
         }
 
         [HttpPost]
         public async Task<ActionResult<ProjectViewModel?>> Define(DefineProject request)
         {
             var id = await _projectSettingService.Process(request);
-
             return StatusCode(201, id);
         }
 
@@ -64,33 +67,33 @@ namespace Presentation.WebAPI
         public async Task<IActionResult> ChangeName(ChangeProjectName request)
         {
             await _projectSettingService.Process(request);
-            return Ok();
+            return NoContent();
         }
 
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            return await View(
-                () => _projectSettingService.Process(new DeleteProject(id)));
+            await _projectSettingService.Process(new DeleteProject(id));
+            return NoContent();
         }
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> CheckProjectForDeletingPermanently(string id)
         {
-            return await View(
-                () => _projectSettingService.Process(new CheckProjectForDeletingPermanently(id)));
+            await _projectSettingService.Process(new CheckProjectForDeletingPermanently(id));
+            return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Restore(string id)
         {
-            return await View(
-                () => _projectSettingService.Process(new RestoreProject(id)));
+            await _projectSettingService.Process(new RestoreProject(id));
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePermanently(string id)
         {
-            return await View(
-                () => _projectSettingService.Process(new DeleteProjectPermanently(id)));
+            await _projectSettingService.Process(new DeleteProjectPermanently(id));
+            return NoContent();
         }
     }
 }

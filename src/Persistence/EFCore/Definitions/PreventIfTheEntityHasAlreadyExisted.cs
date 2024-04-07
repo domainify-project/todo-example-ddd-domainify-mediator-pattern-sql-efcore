@@ -3,7 +3,7 @@ using Domainify.Domain;
 
 namespace Persistence
 {
-    public class PreventIfTheEntityHasAlreadyExistedPreventer<TEntity, TDocument>
+    public class PreventIfTheEntityHasAlreadyExisted<TEntity, TDocument>
         : LogicalPreventer
         where TEntity : BaseEntity<TEntity>
     {
@@ -23,7 +23,7 @@ namespace Persistence
             //return await _collection.Find(_filter).AnyAsync();
         }
 
-        public override IIssue? GetIssue()
+        public override IFault? GetFault()
         {
             return new AnEntityWithTheseUniquenessConditionsHasAlreadyExisted(
                     typeof(TEntity).Name, Description);

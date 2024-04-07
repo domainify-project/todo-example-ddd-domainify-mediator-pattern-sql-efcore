@@ -31,15 +31,15 @@ namespace Domain.ProjectSettingAggregation
         public override async Task<Sprint> ResolveAndGetEntityAsync(
             IMediator mediator)
         {
-            
+            var sprint = (await mediator.Send(new FindSprint(Id, preventIfNoEntityWasFound: true)))!;
+
             var lastYear = DateTime.UtcNow.AddYears(-1);
             InvariantState.DefineAnInvariant(
                 condition: () => { return StartDate < lastYear || EndDate < lastYear; },
-                issue: new StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths());
+                fault: new StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths());
 
             await InvariantState.AssestAsync(mediator);
 
-            var sprint = (await mediator.Send(new FindSprint(Id)))!;
             sprint.SetStartDate(StartDate).SetEndDate(EndDate);
             await base.ResolveAsync(mediator, sprint);
             return sprint;

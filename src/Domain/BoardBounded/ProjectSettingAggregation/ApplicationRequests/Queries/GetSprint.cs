@@ -8,7 +8,7 @@ namespace Domain.ProjectSettingAggregation
     {
         public GetSprint(string id, bool includeDeleted = false) : base(id)
         {
-            //PreventIfNoEntityWasFound = true;
+            PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;
         }
         public override async Task ResolveAsync(IMediator mediator)

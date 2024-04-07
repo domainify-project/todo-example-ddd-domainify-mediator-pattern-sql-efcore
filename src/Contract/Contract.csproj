@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Domainify" Version="1.0.0.8" />
+    <PackageReference Include="Domainify" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

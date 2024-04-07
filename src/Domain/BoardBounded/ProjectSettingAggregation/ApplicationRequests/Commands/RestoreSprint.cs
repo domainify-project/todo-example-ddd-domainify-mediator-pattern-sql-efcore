@@ -15,7 +15,7 @@ namespace Domain.ProjectSettingAggregation
             IMediator mediator)
         {
             var sprint = (await mediator.Send(
-                new FindSprint(Id, includeDeleted: true)))!;
+                new FindSprint(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
 
             InvariantState.AddAnInvariantRequest(new PreventIfTheSameSprintHasAlreadyExisted(sprint));
             await InvariantState.AssestAsync(mediator);

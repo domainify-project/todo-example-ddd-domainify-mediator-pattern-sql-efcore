@@ -17,7 +17,7 @@ namespace Presentation.WebAPI
         {
             _projectSettingService = service;
         }
-        [HttpGet($"/v1/{nameof(ProjectSettingController)}/{{{nameof(GetSprintsList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1/{nameof(ProjectsController)}/{{{nameof(GetSprintsList.ProjectId)}}}/[controller]")]
         public async Task<ActionResult<PaginatedList<SprintViewModel>>> GetList(
             string projectId)
         {
@@ -25,7 +25,7 @@ namespace Presentation.WebAPI
                            .SetProjectId(projectId);
             return await _projectSettingService.Process(request);
         }
-        [HttpGet($"/v1.1/{nameof(ProjectSettingController)}/{{{nameof(GetSprintsList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1.1/{nameof(ProjectsController)}/{{{nameof(GetSprintsList.ProjectId)}}}/[controller]")]
         public async Task<ActionResult<PaginatedList<SprintViewModel>>> GetList(
             string projectId, 
             int? pageNumber = null,

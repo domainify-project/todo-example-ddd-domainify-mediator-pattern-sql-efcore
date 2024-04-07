@@ -19,7 +19,7 @@ namespace Domain.ProjectSettingAggregation
         public override async Task<Project> ResolveAndGetEntityAsync(
             IMediator mediator)
         {
-            var project = (await mediator.Send(new FindProject(Id)))!;
+            var project = (await mediator.Send(new FindProject(Id, preventIfNoEntityWasFound: true)))!;
             project.SetName(Name);
 
             InvariantState.AddAnInvariantRequest(new PreventIfTheSameProjectHasAlreadyExisted(project));
