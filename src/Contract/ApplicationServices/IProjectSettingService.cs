@@ -17,6 +17,7 @@ namespace Contract
         public Task Process(ChangeSprintName request);
         public Task Process(ChangeSprintTimeSpan request);
         public Task Process(DeleteSprint request);
+        public Task Process(DeleteSprintPermanently request);
         public Task Process(CheckSprintForDeletingPermanently request);
         public Task Process(RestoreSprint request);
         public Task<SprintViewModel?> Process(GetSprint request);

@@ -30,9 +30,7 @@ namespace Domain.TaskAggregation
             await InvariantState.AssestAsync(mediator);
 
             var task = Task.New()
-                .SetProjectId(ProjectId)
                 .SetDescription(Description)
-                .SetSprintId(SprintId)
                 .SetStatus(Status);
             await base.ResolveAsync(mediator, task);
             return task;

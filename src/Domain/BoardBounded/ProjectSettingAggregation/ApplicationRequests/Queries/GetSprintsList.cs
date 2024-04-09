@@ -11,9 +11,10 @@ namespace Domain.ProjectSettingAggregation
 
         public bool? IsDeleted { get; set; }
         public string? SearchValue { get; set; } = string.Empty;
-
-        public GetSprintsList()
+        public bool WithTasks { get; private set; } = false;
+        public GetSprintsList(bool withTasks = false)
         {
+            WithTasks = withTasks;
             ValidationState.Validate();
         }
         public GetSprintsList SetProjectId(string value)

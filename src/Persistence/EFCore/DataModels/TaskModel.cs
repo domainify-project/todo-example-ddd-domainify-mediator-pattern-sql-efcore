@@ -12,18 +12,17 @@ namespace Persistence
         public required DateTime ModifiedDate { get; set; }
 
         public required Guid ProjectId { get; set; }
-        public Guid? SprintId { get; protected set; }
+        public Guid? SprintId { get; set; }
 
 
         [MaxLengthShouldBe(1000)]
         [StringLength(1000)]
         [Required(AllowEmptyStrings = false)]
-        public string Description { get; protected set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
-        public Domain.TaskAggregation.TaskStatus Status { get; protected set; }
-
+        public Domain.TaskAggregation.TaskStatus Status { get; set; }
         public static TaskModel InstanceOf(
-            Domain.TaskAggregation.Task task)
+            Domain.TaskAggregation.Task task, string projectId, string? sprintId)
         {
             var dataModel = new TaskModel()
             {
@@ -31,14 +30,14 @@ namespace Persistence
                 IsDeleted = task.IsDeleted,
                 ModifiedDate = task.ModifiedDate,
 
-                ProjectId = new Guid(task.ProjectId),
+                ProjectId = new Guid(projectId),
 
                 Description = task.Description,
                 Status = task.Status,
             };
 
-            if (task.SprintId != null)
-                dataModel.SprintId = new Guid(task.SprintId);
+            if (sprintId != null)
+                dataModel.SprintId = new Guid(sprintId);
 
             return dataModel;
         }
@@ -50,12 +49,7 @@ namespace Persistence
             task.ModifiedDate = ModifiedDate;
             task.IsDeleted = IsDeleted;
 
-            task.SetDescription(Description)
-                .SetProjectId(ProjectId.ToString());
-
-            if(SprintId != null)
-                task.SetSprintId(SprintId.ToString());
-
+            task.SetDescription(Description);
             return task;
         }
 

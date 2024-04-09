@@ -22,7 +22,7 @@ namespace Application
 
             // MediatR Registrations
             services.AddMediatR(typeof(ProjectSettingService));
-            services.AddMediatR(typeof(Persistence.ProjectStore.DefineProjectHandler));
+            services.AddMediatR(typeof(Persistence.ProjectSettingStore.DefineProjectHandler));
             services.AddMediatR(typeof(Domain.ProjectSettingAggregation.DefineProject));
 
             // Application Services

@@ -15,6 +15,7 @@ namespace Domain.ProjectSettingAggregation
         public string Name { get; protected set; } = string.Empty;
 
         public List<Sprint> Sprints { get; set; } = new List<Sprint>();
+        public List<TaskAggregation.Task> Tasks { get; set; } = new List<TaskAggregation.Task>();
 
         public override ConditionProperty<Project>? Uniqueness()
         {
@@ -48,7 +49,6 @@ namespace Domain.ProjectSettingAggregation
             {
                 ModifiedDate = ModifiedDate,
                 IsDeleted = IsDeleted,
-                Sprints = Sprints.Select(i => i.ToViewModel(Name)).ToList(),
                 Id = Id!,
                 Name = Name,
             };

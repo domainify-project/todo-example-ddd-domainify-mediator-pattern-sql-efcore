@@ -29,7 +29,6 @@ namespace Domain.TaskAggregation
 
             var task = (await mediator.Send(new FindTask(Id)))!;
             task.SetDescription(Description)
-                .SetSprintId(SprintId)
                 .SetStatus(Status);
             await base.ResolveAsync(mediator, task);
             return task;

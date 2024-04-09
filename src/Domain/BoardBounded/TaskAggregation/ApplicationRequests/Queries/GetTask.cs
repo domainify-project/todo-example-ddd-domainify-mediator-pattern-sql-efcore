@@ -4,7 +4,7 @@ using Domainify.Domain;
 namespace Domain.TaskAggregation
 {
     public class GetTask :
-        QueryItemRequestById<Task, string, TaskViewModel?>
+        QueryItemRequestById<Task, string, Task?>
     {
         public GetTask(string id) : base(id)
         {

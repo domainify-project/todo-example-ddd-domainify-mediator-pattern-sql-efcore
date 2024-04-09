@@ -78,6 +78,11 @@ namespace Application
             await _mediator.Send(request);
             await _transaction.SaveChangesAsync(concurrencyCheck: true);
         }
+        public async Task Process(DeleteSprintPermanently request)
+        {
+            await _mediator.Send(request);
+            await _transaction.SaveChangesAsync();
+        }
         public async Task Process(CheckSprintForDeletingPermanently request)
         {
             await _mediator.Send(request);
@@ -91,7 +96,7 @@ namespace Application
         }
         public async Task<SprintViewModel?> Process(GetSprint request)
         {
-            return (await _mediator.Send(request))!;
+            return (await _mediator.Send(request))!.ToViewModel();
 
         }
 
