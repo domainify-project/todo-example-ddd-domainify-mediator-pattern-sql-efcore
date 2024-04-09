@@ -46,7 +46,12 @@ namespace Application
         }
         public async Task<TaskViewModel?> Process(GetTask request)
         {
-            return await _mediator.Send(request);
+            return (await _mediator.Send(request))!.ToViewModel();
+        }
+        public async System.Threading.Tasks.Task Process(DeleteTaskPermanently request)
+        {
+            await _mediator.Send(request);
+            await _transaction.SaveChangesAsync(concurrencyCheck: true);
         }
 
         public async Task<PaginatedList<TaskViewModel>> Process(GetTasksList request)

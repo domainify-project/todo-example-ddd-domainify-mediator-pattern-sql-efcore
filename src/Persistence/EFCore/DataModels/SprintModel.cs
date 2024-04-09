@@ -13,12 +13,12 @@ namespace Persistence
         public required DateTime ModifiedDate { get; set; }
 
         [Required]
-        public Guid ProjectId { get; protected set; }
+        public Guid ProjectId { get; set; }
         public required string Name { get; set; }
-        public DateTime? StartDate { get; protected set; }
-        public DateTime? EndDate { get; protected set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public static SprintModel InstanceOf(Sprint sprint, Guid projectId)
+        public static SprintModel InstanceOf(Sprint sprint, string projectId)
         {
             var dataModel = new SprintModel()
             {
@@ -26,7 +26,7 @@ namespace Persistence
                 IsDeleted = sprint.IsDeleted,
                 ModifiedDate = sprint.ModifiedDate,
 
-                ProjectId = projectId,
+                ProjectId = new Guid(projectId),
                 Name = sprint.Name,
                 StartDate = sprint.StartDate,
                 EndDate = sprint.EndDate,

@@ -7,9 +7,14 @@ namespace Domain.ProjectSettingAggregation
         QueryItemRequestById<Project, string, Project?>
     {
         public bool WithSprints { get; private set; } = false;
-        public GetProject(string id, bool withSprints = false, bool includeDeleted = false) : base(id)
+        public bool WithTasks { get; private set; } = false;
+        public GetProject(string id,
+            bool withSprints = false,
+            bool withTasks = false,
+            bool includeDeleted = false) : base(id)
         {
             WithSprints = withSprints;
+            WithTasks = withTasks;
             TrackingMode = true;
             PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;

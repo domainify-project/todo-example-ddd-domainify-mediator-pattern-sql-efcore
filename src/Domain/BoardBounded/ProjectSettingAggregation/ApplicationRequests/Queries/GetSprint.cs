@@ -4,10 +4,14 @@ using MediatR;
 namespace Domain.ProjectSettingAggregation
 {
     public class GetSprint :
-        QueryItemRequestById<Sprint, string, SprintViewModel?>
+        QueryItemRequestById<Sprint, string, Sprint?>
     {
-        public GetSprint(string id, bool includeDeleted = false) : base(id)
+        public bool WithTasks { get; private set; } = false;
+        public GetSprint(string id, 
+            bool withTasks = false, 
+            bool includeDeleted = false) : base(id)
         {
+            WithTasks = withTasks;
             PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;
         }

@@ -16,6 +16,8 @@ namespace Domain.ProjectSettingAggregation
 
         public DateTime? EndDate { get; protected set; }
 
+        public List<TaskAggregation.Task> Tasks { get; set; } = new List<TaskAggregation.Task>();
+
         public override ConditionProperty<Sprint>? Uniqueness()
         {
             return new ConditionProperty<Sprint>()
@@ -50,7 +52,7 @@ namespace Domain.ProjectSettingAggregation
             return this;
         }
 
-        public SprintViewModel ToViewModel(string projectName)
+        public SprintViewModel ToViewModel()
         {
             var viewModel = new SprintViewModel()
             {
@@ -58,7 +60,6 @@ namespace Domain.ProjectSettingAggregation
                 IsDeleted = IsDeleted,
                 Id = Id!,
                 Name = Name,
-                ProjectName = projectName,
                 StartDate = StartDate,
                 EndDate = EndDate,
             };

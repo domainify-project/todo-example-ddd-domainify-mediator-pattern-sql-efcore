@@ -11,13 +11,11 @@ namespace Presentation.WebAPI
     public class ProjectsController : ApiController
     {
         private readonly IProjectSettingService _projectSettingService;
-        private readonly ITaskService _taskService;
+
         public ProjectsController(
-            IProjectSettingService projectService,
-            ITaskService taskService)
+            IProjectSettingService projectService)
         {
             _projectSettingService = projectService;
-            _taskService = taskService;
         }
 
         [HttpGet]
@@ -36,7 +34,9 @@ namespace Presentation.WebAPI
         [HttpGet($"/v1.1/[controller]")]
         public async Task<ActionResult<PaginatedList<ProjectViewModel>>> GetList(
             int? pageNumber = null,
-            int? pageSize = null)
+            int? pageSize = null,
+            bool? withSprints = null,
+            bool? withTasks = null)
         {
             var request = GetRequest<GetProjectsList>();
             request.Setup(
@@ -48,7 +48,7 @@ namespace Presentation.WebAPI
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjectViewModel?>> Get(
-            string id, bool? withIndices = null)
+            string id, bool? withSprints = null, bool? withTasks = null)
         {
             var request = GetRequest<GetProject>();
             request.SetId(id);

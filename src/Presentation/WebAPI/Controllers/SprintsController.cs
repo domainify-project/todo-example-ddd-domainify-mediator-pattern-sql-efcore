@@ -29,7 +29,8 @@ namespace Presentation.WebAPI
         public async Task<ActionResult<PaginatedList<SprintViewModel>>> GetList(
             string projectId, 
             int? pageNumber = null,
-            int? pageSize = null)
+            int? pageSize = null, 
+            bool? withTasks = null)
         {
             var request = GetRequest<GetSprintsList>()
                            .SetProjectId(projectId);
@@ -40,52 +41,65 @@ namespace Presentation.WebAPI
             return await _projectSettingService.Process(request);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<SprintViewModel?>> Get(string id)
+        public async Task<ActionResult<SprintViewModel?>> Get(string id, bool? withTasks = null)
         {
-            return await View(
-                () => _projectSettingService.Process(new GetSprint(id)));
+            var request = GetRequest<GetSprint>();
+            request.SetId(id);
+
+            return await _projectSettingService.Process(request);
         }
 
         [HttpPost]
         public async Task<ActionResult<SprintViewModel?>> Define(DefineSprint request)
         {
             var id = await _projectSettingService.Process(request);
-            return CreatedAtAction(nameof(Get), new { id }, id);
+            return StatusCode(201, id);
         }
 
         [HttpPatch("[action]")]
         public async Task<IActionResult> ChangeSprintName(ChangeSprintName request)
         {
-            return await View(
-                () => _projectSettingService.Process(request));
+            await _projectSettingService.Process(request);
+            return NoContent();
         }
         [HttpPatch("[action]")]
         public async Task<IActionResult> ChangeSprintTimeSpan(ChangeSprintTimeSpan request)
         {
-            return await View(
-                () => _projectSettingService.Process(request));
+            await _projectSettingService.Process(request);
+            return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Delete(
-            string id, bool archivingAllTaskMode)
+            string id, bool toDeleteAllTaskStatus)
         {
             var request = GetRequest<DeleteSprint>();
             request.SetId(id);
 
-            return await View(
-                () => _projectSettingService.Process(request));
+            await _projectSettingService.Process(request);
+            return NoContent();
         }
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> CheckSprintForDeletingPermanently(string id)
         {
-            return await View(
-                () => _projectSettingService.Process(new CheckSprintForDeletingPermanently(id)));
+            await _projectSettingService.Process(new CheckSprintForDeletingPermanently(id));
+            return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Restore(string id)
         {
-            return await View(
-                () => _projectSettingService.Process(new RestoreSprint(id)));
+            await _projectSettingService.Process(new RestoreSprint(id));
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePermanently(
+            string id, bool toDeleteAllTaskStatus)
+        {
+            var request = GetRequest<DeleteSprintPermanently>();
+            request.SetId(id);
+
+            await _projectSettingService.Process(request);
+            return NoContent();
         }
     }
 }

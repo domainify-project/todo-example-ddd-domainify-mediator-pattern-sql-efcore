@@ -14,9 +14,6 @@ namespace Domain.TaskAggregation
         [Required(AllowEmptyStrings = false)]
         public string Description { get; protected set; } = string.Empty;
 
-        [Required]
-        public string ProjectId { get; protected set; }
-        public string? SprintId { get; protected set; }
         public TaskStatus Status { get; protected set; }
         public static Task New() { return new Task(); }
 
@@ -25,30 +22,14 @@ namespace Domain.TaskAggregation
             // The version field is used for persisting in a nosql database like MongoDB
             //Version = 1.0;
         }
-        public static Task NewInstance(
-            string projectId,
-            string? sprintId = null)
+        public static Task NewInstance()
         {
-            return new Task()
-                .SetProjectId(projectId)
-                .SetSprintId(sprintId);
+            return new Task();
         }
 
-        public Task SetProjectId(string value)
-        {
-            ProjectId = value;
-
-            return this;
-        }
         public Task SetDescription(string value)
         {
             Description = value;
-
-            return this;
-        }
-        public Task SetSprintId(string? value)
-        {
-            SprintId = value;
 
             return this;
         }
@@ -71,8 +52,6 @@ namespace Domain.TaskAggregation
                 ModifiedDate = ModifiedDate,
                 IsDeleted = IsDeleted,
                 Id = Id!,
-                ProjectId = ProjectId,
-                SprintId = SprintId!,
                 ProjectName = projectName!,
                 SprintName = sprintName,
                 Status = Status,

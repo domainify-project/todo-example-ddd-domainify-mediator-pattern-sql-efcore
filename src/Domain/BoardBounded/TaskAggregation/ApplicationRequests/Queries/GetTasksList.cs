@@ -7,6 +7,8 @@ namespace Domain.TaskAggregation
     public class GetTasksList :
         QueryListRequest<Task, PaginatedList<TaskViewModel>>
     {
+        public bool? IsDeleted { get; set; }
+
         [Required]
         public Guid ProjectId { get; private set; }
         public Guid? SprintId { get; set; }

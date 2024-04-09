@@ -34,9 +34,4 @@
     <PackageReference Include="Domainify" Version="1.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BoardBounded\TaskAggregation\ApplicationRequests\Checks\" />
-    <Folder Include="BoardBounded\TaskAggregation\Issues\" />
-  </ItemGroup>
-
 </Project>

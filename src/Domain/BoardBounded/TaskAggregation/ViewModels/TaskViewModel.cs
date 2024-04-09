@@ -12,9 +12,6 @@ namespace Domain.TaskAggregation
         [DataType(DataType.Date)]
         public DateTime? ModifiedDate { get; set; }
 
-        public string ProjectId { get; set; } = string.Empty;
-        public string SprintId { get; set; } = string.Empty;
-
         [Display(Name = "Project")]
         public required string ProjectName { get; set; }
  
