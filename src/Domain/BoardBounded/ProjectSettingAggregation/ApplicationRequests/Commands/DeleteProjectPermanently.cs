@@ -1,4 +1,5 @@
-﻿using Domainify.Domain;
+﻿using Domain.TaskAggregation;
+using Domainify.Domain;
 using MediatR;
 
 namespace Domain.ProjectSettingAggregation
@@ -15,13 +16,16 @@ namespace Domain.ProjectSettingAggregation
         public override async Task<Project> ResolveAndGetEntityAsync(IMediator mediator)
         {
             var project = (await mediator.Send(
-                new FindProject(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
+                new FindProject(Id, 
+                includeDeleted: true, 
+                preventIfNoEntityWasFound: true)))!;
 
-            InvariantState.AddAnInvariantRequest(new PreventIfProjectHasSomeSprints(id: Id));
-            InvariantState.AddAnInvariantRequest(new PreventIfProjectHasSomeTasks(id: Id));
+            base.Prepare(project);
+
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, project);
+
             return project;
         }
     }

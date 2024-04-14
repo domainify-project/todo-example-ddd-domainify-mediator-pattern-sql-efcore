@@ -13,9 +13,13 @@ namespace Domain.TaskAggregation
             IncludeDeleted = includeDeleted;
             PreventIfNoEntityWasFound = preventIfNoEntityWasFound;
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
+        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator, Task task)
         {
+            base.Prepare(task);
+
             await InvariantState.AssestAsync(mediator);
+
+            await base.ResolveAsync(mediator, task);
         }
     }
 }

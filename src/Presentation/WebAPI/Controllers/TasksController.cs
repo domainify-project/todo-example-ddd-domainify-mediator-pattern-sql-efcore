@@ -1,4 +1,5 @@
 using Contract;
+using Domain.ProjectSettingAggregation;
 using Domain.TaskAggregation;
 using Domainify.AspMvc;
 using Domainify.Domain;
@@ -18,7 +19,7 @@ namespace Presentation.WebAPI
             _service = service;
         }
 
-        [HttpGet($"/v1/{nameof(ProjectsController)}/{{{nameof(GetTasksList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1/projects/{{projectId}}/[controller]")]
         public async Task<ActionResult<PaginatedList<TaskViewModel>>> GetList(
             Guid projectId,
             Guid? sprintId = null,
@@ -27,13 +28,10 @@ namespace Presentation.WebAPI
         {
             var request = GetRequest<GetTasksList>();
             request.SetProjectId(projectId);
-            request.Setup(
-                paginationSetting: new PaginationSetting(
-                    defaultPageNumber: 1, defaultPageSize: 10));
 
             return await _service.Process(request);
         }
-        [HttpGet($"/v1.1/{nameof(ProjectsController)}/{{{nameof(GetTasksList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1.1/projects/{{projectId}}/[controller]")]
         public async Task<ActionResult<PaginatedList<TaskViewModel>>> GetList(
             Guid projectId,
             Guid? sprintId = null,
@@ -53,40 +51,54 @@ namespace Presentation.WebAPI
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskViewModel?>> Get(string id)
         {
-            return await View(
-                () => _service.Process(new GetTask(id)));
+            var request = GetRequest<GetTask>();
+            request.SetId(id);
+
+            return await _service.Process(request);
         }
 
         [HttpPost]
         public async Task<ActionResult<TaskViewModel?>> Add(AddTask request)
         {
             var id = await _service.Process(request);
-            return CreatedAtAction(nameof(Get), new { id }, id);
+            return StatusCode(201, id);
         }
 
         [HttpPut]
         public async Task<IActionResult> Edit(EditTask request)
         {
-            return await View(
-                () => _service.Process(request));
+            await _service.Process(request);
+            return NoContent();
         }
         [HttpPatch("[action]")]
         public async Task<IActionResult> ChangeTaskStatus(ChangeTaskStatus request)
         {
-            return await View(
-                () => _service.Process(request));
+            await _service.Process(request);
+            return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            return await View(
-                () => _service.Process(new DeleteTask(id)));
+            var request = GetRequest<DeleteTask>();
+            request.SetId(id);
+
+            await _service.Process(request);
+            return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Restore(string id)
         {
-            return await View(
-                () => _service.Process(new RestoreTask(id)));
+            await _service.Process(new RestoreTask(id));
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePermanently(string id)
+        {
+            var request = GetRequest<DeleteTaskPermanently>();
+            request.SetId(id);
+
+            await _service.Process(request);
+            return NoContent();
         }
         [HttpGet("[action]")]
         public async Task<ActionResult<IEnumerable<KeyValuePair<int, string>>>> GetTaskStatusItems()

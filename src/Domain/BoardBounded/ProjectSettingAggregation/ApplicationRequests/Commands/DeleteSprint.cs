@@ -7,28 +7,28 @@ namespace Domain.ProjectSettingAggregation
     public class DeleteSprint :
         RequestToDeleteById<Sprint, string>
     {
-        public bool ToDeleteAllTaskStatus { get; private set; }
+        public bool DeleteAllRelatedTask { get; private set; }
 
         public DeleteSprint(string id,
-            bool toDeleteAllTaskStatus = false) 
+            bool deleteAllRelatedTask = false) 
             : base(id)
         {
-            ToDeleteAllTaskStatus = toDeleteAllTaskStatus;
+            DeleteAllRelatedTask = deleteAllRelatedTask;
             ValidationState.Validate();
         }
         public override async Task<Sprint> ResolveAndGetEntityAsync(
             IMediator mediator)
         {
-            await InvariantState.AssestAsync(mediator);
-
             var sprint = (await mediator.Send(
                 new FindSprint(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
-            await base.ResolveAsync(mediator, sprint);
 
-            if (ToDeleteAllTaskStatus)
+            base.Prepare(sprint);
+
+            await InvariantState.AssestAsync(mediator);
+
+            if (DeleteAllRelatedTask)
             {
-                await mediator.Send(new SetTasksOfTheSprintToNoSprint()
-                    .SetSprintId(Id));
+                await mediator.Send(new DeleteAllRelatedTasksOfSprint().SetSprintId(Id));
             }
             else
             {
@@ -38,6 +38,8 @@ namespace Domain.ProjectSettingAggregation
                 foreach (var taskId in tasksIdsList)
                     await mediator.Send(new ChangeTaskSprint(id: taskId, sprintId: null));
             }
+
+            await base.ResolveAsync(mediator, sprint);
 
             return sprint;
         }

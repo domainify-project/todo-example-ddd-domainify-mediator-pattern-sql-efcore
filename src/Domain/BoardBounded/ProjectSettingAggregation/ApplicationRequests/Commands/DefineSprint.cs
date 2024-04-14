@@ -26,7 +26,7 @@ namespace Domain.ProjectSettingAggregation
                 .SetName(Name);
    
             InvariantState.AddAnInvariantRequest(
-                new PreventIfTheSameSprintHasAlreadyExisted(sprint, projectId: ProjectId));
+                new PreventIfTheSameSprintHasAlreadyExisted(name: sprint.Name, parentProjectId: ProjectId));
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, sprint);

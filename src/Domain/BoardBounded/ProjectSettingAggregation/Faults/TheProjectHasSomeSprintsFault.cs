@@ -4,13 +4,13 @@ using Domainify.Domain;
 
 namespace Domain.ProjectSettingAggregation
 {
-    internal class ProjectHasSomeSprints : InvariantFault
+    internal class TheProjectHasSomeSprintsFault : InvariantFault
     {
-        public ProjectHasSomeSprints(
+        public TheProjectHasSomeSprintsFault(
             string description = "") :
             base(outerDescription: description,
                 innerDescription: string.Format(CultureInfo.CurrentCulture,
-                Resource.Invariant_Issue_TheProjectHasSomeSprints))
+                Resource.Invariant_TheProjectHasSomeSprintsFault))
         {
         }
     }

@@ -9,10 +9,12 @@ namespace Persistence.ProjectSettingStore
     internal class FindProjectHandler :
         IRequestHandler<FindProject, Project?>
     {
+        private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
         public FindProjectHandler(
-            TodoDbContext dbContext)
+            IMediator mediator, TodoDbContext dbContext)
         {
+            _mediator = mediator;
             _dbContext = dbContext;
         }
         public async Task<Project?> Handle(
@@ -32,15 +34,11 @@ namespace Persistence.ProjectSettingStore
                 query = query.Include(i => i.Tasks);
 
             var retrievedItem = await query.FirstOrDefaultAsync();
+            var project = retrievedItem?.ToEntity();
 
-            if(retrievedItem == null && request.PreventIfNoEntityWasFound)
-            {
-                await new LogicalState().AddFault(
-                    new NoEntityWasFound(typeof(Project).Name))
-                    .AssesstAsync();
-            }
+            await request.ResolveAsync(_mediator, project!);
 
-            return retrievedItem?.ToEntity();
+            return project;
         }
     }
 }

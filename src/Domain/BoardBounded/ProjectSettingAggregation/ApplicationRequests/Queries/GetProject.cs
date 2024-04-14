@@ -15,13 +15,16 @@ namespace Domain.ProjectSettingAggregation
         {
             WithSprints = withSprints;
             WithTasks = withTasks;
-            TrackingMode = true;
             PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;
         }
-        public override async Task ResolveAsync(IMediator mediator)
+        public override async Task ResolveAsync(IMediator mediator, Project project)
         {
+            base.Prepare(project);
+
             await InvariantState.AssestAsync(mediator);
+
+            await base.ResolveAsync(mediator, project);
         }
     }
 }

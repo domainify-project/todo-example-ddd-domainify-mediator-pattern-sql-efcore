@@ -30,7 +30,11 @@ namespace Domain.TaskAggregation
             var task = (await mediator.Send(new FindTask(Id)))!;
             task.SetDescription(Description)
                 .SetStatus(Status);
+
+            base.Prepare(task);
+
             await base.ResolveAsync(mediator, task);
+
             return task;
         }
     }

@@ -9,13 +9,14 @@ namespace Persistence.TaskStore
     public class GetTaskHandler :
         IRequestHandler<GetTask, Domain.TaskAggregation.Task?>
     {
+        private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
         public GetTaskHandler(
-            TodoDbContext dbContext)
+            IMediator mediator, TodoDbContext dbContext)
         {
+            _mediator = mediator;
             _dbContext = dbContext;
         }
-
         public async Task<Domain.TaskAggregation.Task?> Handle(
             GetTask request,
             CancellationToken cancellationToken)
@@ -27,15 +28,11 @@ namespace Persistence.TaskStore
                 query = query.Where(i => i.IsDeleted == false);
 
             var retrievedItem = await query.FirstOrDefaultAsync();
+            var task = retrievedItem?.ToEntity();
 
-            if (retrievedItem == null && request.PreventIfNoEntityWasFound)
-            {
-                await new LogicalState().AddFault(
-                    new NoEntityWasFound(typeof(Domain.TaskAggregation.Task).Name))
-                    .AssesstAsync();
-            }
+            await request.ResolveAsync(_mediator, task!);
 
-            return retrievedItem?.ToEntity();
+            return task;
         }
     }
 }

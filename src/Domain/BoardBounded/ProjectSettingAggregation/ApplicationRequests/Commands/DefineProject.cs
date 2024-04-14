@@ -21,7 +21,9 @@ namespace Domain.ProjectSettingAggregation
             var project = Project.NewInstance()
                 .SetName(Name);
 
-            InvariantState.AddAnInvariantRequest(new PreventIfTheSameProjectHasAlreadyExisted(project));
+            base.Prepare(project);
+
+            InvariantState.AddAnInvariantRequest(new PreventIfTheSameProjectHasAlreadyExisted(name: project.Name));
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, project);

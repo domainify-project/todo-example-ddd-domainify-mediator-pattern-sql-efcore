@@ -23,15 +23,12 @@ namespace Persistence.ProjectSettingStore
             await request.ResolveAsync(_mediator);
 
             var query = _dbContext.Projects
-                .Where(i => !i.IsDeleted && i.Name == request.Project.Name);
+                .Where(i => !i.IsDeleted && i.Name == request.Name);
 
-            if (!string.IsNullOrEmpty(request.Project.Id))
-                query = query.Where(p => p.Id != new Guid(request.Project.Id));
+            if (!string.IsNullOrEmpty(request.ProjectId))
+                query = query.Where(i => i.Id != new Guid(request.ProjectId));
 
-            if (request.Project.Uniqueness() != null && request.Project.Uniqueness()!.Condition != null)
-                return await query.AnyAsync();
-
-            return false;
+            return await query.AnyAsync();
         }
     }
 }

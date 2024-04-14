@@ -8,6 +8,7 @@ namespace Contract
         public Task<string> Process(AddTask request);
         public System.Threading.Tasks.Task Process(EditTask request);
         public System.Threading.Tasks.Task Process(DeleteTask request);
+        public System.Threading.Tasks.Task Process(DeleteTaskPermanently request);
         public System.Threading.Tasks.Task Process(ChangeTaskStatus request);
         public System.Threading.Tasks.Task Process(RestoreTask request);
         public Task<TaskViewModel?> Process(GetTask request);

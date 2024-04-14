@@ -22,8 +22,14 @@ namespace Domain.ProjectSettingAggregation
             var sprint = (await mediator.Send(new FindSprint(id: Id, preventIfNoEntityWasFound: true)))!;
             sprint.SetName(Name);
 
+            base.Prepare(sprint);
+
+            var parentProjectId = await mediator.Send(
+                new FindProjectIdOfSprint(sprintId: sprint.Id));
+
             InvariantState.AddAnInvariantRequest(
-                new PreventIfTheSameSprintHasAlreadyExisted(sprint));
+                new PreventIfTheSameSprintHasAlreadyExisted(
+                    name: sprint.Name, parentProjectId: parentProjectId!, sprintId: sprint.Id));
             await InvariantState.AssestAsync(mediator);
  
             await base.ResolveAsync(mediator, sprint);

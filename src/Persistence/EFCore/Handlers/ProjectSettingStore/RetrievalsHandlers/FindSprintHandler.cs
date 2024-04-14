@@ -9,10 +9,12 @@ namespace Persistence.ProjectSettingStore
     internal class FindSprintHandler :
         IRequestHandler<FindSprint, Sprint?>
     {
+        private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
         public FindSprintHandler(
-            TodoDbContext dbContext)
+            IMediator mediator, TodoDbContext dbContext)
         {
+            _mediator = mediator;
             _dbContext = dbContext;
         }
         public async Task<Sprint?> Handle(
@@ -29,15 +31,11 @@ namespace Persistence.ProjectSettingStore
                 query = query.Include(i => i.Tasks);
 
             var retrievedItem = await query.FirstOrDefaultAsync();
+            var sprint = retrievedItem?.ToEntity();
 
-            if(retrievedItem == null && request.PreventIfNoEntityWasFound)
-            {
-                await new LogicalState().AddFault(
-                    new NoEntityWasFound(typeof(Sprint).Name))
-                    .AssesstAsync();
-            }
+            await request.ResolveAsync(_mediator, sprint!);
 
-            return retrievedItem?.ToEntity();
+            return sprint;
         }
     }
 }

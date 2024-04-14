@@ -1,5 +1,4 @@
 ﻿using Domain.ProjectSettingAggregation;
-using Domainify.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +8,12 @@ namespace Persistence.ProjectSettingStore
     public class GetProjectHandler :
         IRequestHandler<GetProject, Project?>
     {
+        private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
         public GetProjectHandler(
-            TodoDbContext dbContext)
+            IMediator mediator, TodoDbContext dbContext)
         {
+            _mediator = mediator;
             _dbContext = dbContext;
         }
 
@@ -33,15 +34,11 @@ namespace Persistence.ProjectSettingStore
                 query = query.Include(i => i.Tasks);
 
             var retrievedItem = await query.FirstOrDefaultAsync();
+            var project = retrievedItem?.ToEntity();
 
-            if (retrievedItem == null && request.PreventIfNoEntityWasFound)
-            {
-                await new LogicalState().AddFault(
-                    new NoEntityWasFound(typeof(Project).Name))
-                    .AssesstAsync();
-            }
+            await request.ResolveAsync(_mediator, project!);
 
-            return retrievedItem?.ToEntity();
+            return project;
         }
     }
 }
