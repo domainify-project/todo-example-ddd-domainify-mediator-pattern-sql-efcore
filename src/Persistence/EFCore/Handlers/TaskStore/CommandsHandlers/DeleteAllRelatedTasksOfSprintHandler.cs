@@ -1,15 +1,14 @@
 ﻿using MediatR;
 using Domain.TaskAggregation;
-using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.TaskStore
 {
-    internal class SetTasksOfTheSprintToNoSprintHandler :
-        IRequestHandler<SetTasksOfTheSprintToNoSprint>
+    internal class DeleteAllRelatedTasksOfSprintHandler :
+        IRequestHandler<DeleteAllRelatedTasksOfSprint>
     {
         private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
-        public SetTasksOfTheSprintToNoSprintHandler(
+        public DeleteAllRelatedTasksOfSprintHandler(
             IMediator mediator, TodoDbContext dbContext)
         {
             _mediator = mediator;
@@ -17,7 +16,7 @@ namespace Persistence.TaskStore
         }
 
         public async Task<Unit> Handle(
-            SetTasksOfTheSprintToNoSprint request,
+            DeleteAllRelatedTasksOfSprint request,
             CancellationToken cancellationToken)
         {
             await request.ResolveAsync(_mediator);

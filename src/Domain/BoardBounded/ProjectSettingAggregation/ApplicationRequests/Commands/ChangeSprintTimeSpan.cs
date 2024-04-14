@@ -33,10 +33,12 @@ namespace Domain.ProjectSettingAggregation
         {
             var sprint = (await mediator.Send(new FindSprint(Id, preventIfNoEntityWasFound: true)))!;
 
+            base.Prepare(sprint);
+
             var lastYear = DateTime.UtcNow.AddYears(-1);
             InvariantState.DefineAnInvariant(
                 condition: () => { return StartDate < lastYear || EndDate < lastYear; },
-                fault: new StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths());
+                fault: new StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonthsFault());
 
             await InvariantState.AssestAsync(mediator);
 

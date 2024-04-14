@@ -7,14 +7,19 @@ namespace Domain.ProjectSettingAggregation
     internal class PreventIfTheSameProjectHasAlreadyExisted
         : InvariantRequest<Project>
     {
-        public Project Project { get; private set; }
-        public PreventIfTheSameProjectHasAlreadyExisted(Project project)
+        [BindTo(typeof(Project), nameof(Project.Id))]
+        public string? ProjectId { get; private set; }
+
+        [BindTo(typeof(Project), nameof(Project.Name))]
+        public string Name { get; protected set; }
+        public PreventIfTheSameProjectHasAlreadyExisted(string name, string? projectId = null)
         {
-            Project = project;
+            Name = name;
+            ProjectId = projectId;
         }
         public override IFault? GetFault()
         {
-            return new AnEntityWithTheseUniquenessConditionsHasAlreadyExisted(
+            return new AnEntityWithThesePropertiesHasAlreadyExistedFault(
                     typeof(Project).Name, Description);
         }
         public override async Task ResolveAsync(IMediator mediator)

@@ -56,7 +56,8 @@ namespace Domain.TaskAggregation
                 SprintName = sprintName,
                 Status = Status,
                 StatusName = EnumHelper.GetEnumMemberResourceValue<TaskStatus>(
-                    Resource.ResourceManager, Status!)
+                    Resource.ResourceManager, Status!),
+                Description = Description
             };
  
             return viewModel;

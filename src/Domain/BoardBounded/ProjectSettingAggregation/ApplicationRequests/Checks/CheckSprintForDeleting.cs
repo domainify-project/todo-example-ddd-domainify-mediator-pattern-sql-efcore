@@ -3,10 +3,10 @@ using MediatR;
 
 namespace Domain.ProjectSettingAggregation
 {
-    public class CheckSprintForDeletingPermanently :
+    public class CheckSprintForDeleting :
         RequestToCheckEntityForDeletingById<Sprint, string>
     {
-        public CheckSprintForDeletingPermanently(string id)
+        public CheckSprintForDeleting(string id)
             : base(id)
         {
         }
@@ -14,11 +14,16 @@ namespace Domain.ProjectSettingAggregation
         public override async Task ResolveAsync(IMediator mediator)
         {
             var sprint = (await mediator.Send(
-                new FindSprint(Id, preventIfNoEntityWasFound: true)))!;
-            await base.ResolveAsync(mediator, sprint);
+                new FindSprint(Id,
+                preventIfNoEntityWasFound: true,
+                includeDeleted: true)))!;
+
+            base.Prepare(sprint);
 
             InvariantState.AddAnInvariantRequest(new PreventIfSprintHasSomeTasks(id: Id));
             await InvariantState.AssestAsync(mediator);
+
+            await base.ResolveAsync(mediator, sprint);
         }
     }
 }

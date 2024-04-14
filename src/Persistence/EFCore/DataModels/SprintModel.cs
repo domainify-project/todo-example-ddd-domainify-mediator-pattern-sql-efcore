@@ -22,7 +22,7 @@ namespace Persistence
         {
             var dataModel = new SprintModel()
             {
-                Id = new Guid(sprint.Id),
+                Id = Guid.TryParse(sprint.Id, out var sprintId) ? sprintId : Guid.NewGuid(),
                 IsDeleted = sprint.IsDeleted,
                 ModifiedDate = sprint.ModifiedDate,
 

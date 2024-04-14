@@ -18,14 +18,6 @@ namespace Domain.ProjectSettingAggregation
 
         public List<TaskAggregation.Task> Tasks { get; set; } = new List<TaskAggregation.Task>();
 
-        public override ConditionProperty<Sprint>? Uniqueness()
-        {
-            return new ConditionProperty<Sprint>()
-            {
-                Condition = x => x.Name == Name,
-                Description = Resource.ASprintWithThisNameOnThisProjectHasAlreadyExisted
-            };
-        }
 
         public static Sprint NewInstance()
         {

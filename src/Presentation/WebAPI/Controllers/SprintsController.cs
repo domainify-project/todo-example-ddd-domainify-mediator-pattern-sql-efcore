@@ -11,21 +11,21 @@ namespace Presentation.WebAPI
     [Route("v1/[controller]")]
     public class SprintsController : ApiController
     {
-        private readonly IProjectSettingService _projectSettingService;
+        private readonly IProjectSettingService _service;
 
         public SprintsController(IProjectSettingService service)
         {
-            _projectSettingService = service;
+            _service = service;
         }
-        [HttpGet($"/v1/{nameof(ProjectsController)}/{{{nameof(GetSprintsList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1/Projects/{{projectId}}/[controller]")]
         public async Task<ActionResult<PaginatedList<SprintViewModel>>> GetList(
             string projectId)
         {
             var request = GetRequest<GetSprintsList>()
                            .SetProjectId(projectId);
-            return await _projectSettingService.Process(request);
+            return await _service.Process(request);
         }
-        [HttpGet($"/v1.1/{nameof(ProjectsController)}/{{{nameof(GetSprintsList.ProjectId)}}}/[controller]")]
+        [HttpGet($"/v1.1/Projects/{{projectId}}/[controller]")]
         public async Task<ActionResult<PaginatedList<SprintViewModel>>> GetList(
             string projectId, 
             int? pageNumber = null,
@@ -38,7 +38,7 @@ namespace Presentation.WebAPI
                 paginationSetting: new PaginationSetting(
                     defaultPageNumber: 1, defaultPageSize: 10));
 
-            return await _projectSettingService.Process(request);
+            return await _service.Process(request);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<SprintViewModel?>> Get(string id, bool? withTasks = null)
@@ -46,59 +46,59 @@ namespace Presentation.WebAPI
             var request = GetRequest<GetSprint>();
             request.SetId(id);
 
-            return await _projectSettingService.Process(request);
+            return await _service.Process(request);
         }
 
         [HttpPost]
         public async Task<ActionResult<SprintViewModel?>> Define(DefineSprint request)
         {
-            var id = await _projectSettingService.Process(request);
+            var id = await _service.Process(request);
             return StatusCode(201, id);
         }
 
         [HttpPatch("[action]")]
         public async Task<IActionResult> ChangeSprintName(ChangeSprintName request)
         {
-            await _projectSettingService.Process(request);
+            await _service.Process(request);
             return NoContent();
         }
         [HttpPatch("[action]")]
         public async Task<IActionResult> ChangeSprintTimeSpan(ChangeSprintTimeSpan request)
         {
-            await _projectSettingService.Process(request);
+            await _service.Process(request);
             return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Delete(
-            string id, bool toDeleteAllTaskStatus)
+            string id, bool deleteAllRelatedTask)
         {
             var request = GetRequest<DeleteSprint>();
             request.SetId(id);
 
-            await _projectSettingService.Process(request);
+            await _service.Process(request);
             return NoContent();
         }
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> CheckSprintForDeletingPermanently(string id)
         {
-            await _projectSettingService.Process(new CheckSprintForDeletingPermanently(id));
+            await _service.Process(new CheckSprintForDeleting(id));
             return NoContent();
         }
         [HttpPatch("[action]/{id}")]
         public async Task<IActionResult> Restore(string id)
         {
-            await _projectSettingService.Process(new RestoreSprint(id));
+            await _service.Process(new RestoreSprint(id));
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePermanently(
-            string id, bool toDeleteAllTaskStatus)
+            string id, bool deleteAllRelatedTask)
         {
             var request = GetRequest<DeleteSprintPermanently>();
             request.SetId(id);
 
-            await _projectSettingService.Process(request);
+            await _service.Process(request);
             return NoContent();
         }
     }

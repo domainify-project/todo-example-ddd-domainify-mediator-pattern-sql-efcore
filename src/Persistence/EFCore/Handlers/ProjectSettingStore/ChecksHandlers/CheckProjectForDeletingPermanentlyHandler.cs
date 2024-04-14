@@ -4,7 +4,7 @@ using MediatR;
 namespace Persistence.ProjectSettingStore
 {
     public class CheckProjectForDeletingPermanentlyHandler :
-        IRequestHandler<CheckProjectForDeletingPermanently>
+        IRequestHandler<CheckProjectForDeleting>
     {
         private readonly IMediator _mediator;
         public CheckProjectForDeletingPermanentlyHandler(IMediator mediator)
@@ -13,7 +13,7 @@ namespace Persistence.ProjectSettingStore
         }
 
         public async Task<Unit> Handle(
-            CheckProjectForDeletingPermanently request,
+            CheckProjectForDeleting request,
             CancellationToken cancellationToken)
         {
             await request.ResolveAsync(_mediator);

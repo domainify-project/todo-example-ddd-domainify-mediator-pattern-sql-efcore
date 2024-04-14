@@ -8,16 +8,26 @@ namespace Domain.ProjectSettingAggregation
         : InvariantRequest<Sprint>
     {
         [BindTo(typeof(Project), nameof(Project.Id))]
-        public string? ProjectId { get; private set; }
-        public Sprint Sprint { get; private set; }
-        public PreventIfTheSameSprintHasAlreadyExisted(Sprint sprint, string? projectId = null)
+        public string ParentProjectId { get; private set; }
+
+        [BindTo(typeof(Sprint), nameof(Sprint.Id))]
+        public string? SprintId { get; private set; }
+
+        [BindTo(typeof(Sprint), nameof(Sprint.Name))]
+        public string Name { get; protected set; }
+
+        public PreventIfTheSameSprintHasAlreadyExisted(
+            string name,
+            string parentProjectId,
+            string? sprintId = null)
         {
-            Sprint = sprint;
-            ProjectId = projectId;
+            Name = name;
+            ParentProjectId = parentProjectId;
+            SprintId = sprintId;
         }
         public override IFault? GetFault()
         {
-            return new AnEntityWithTheseUniquenessConditionsHasAlreadyExisted(
+            return new AnEntityWithThesePropertiesHasAlreadyExistedFault(
                     typeof(Sprint).Name, Description);
         }
         public override async Task ResolveAsync(IMediator mediator)

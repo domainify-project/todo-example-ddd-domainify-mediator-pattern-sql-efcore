@@ -35,7 +35,7 @@ namespace Persistence.ProjectSettingStore
 
             var retrievedItems = (await query.Select
                 (i => new { Sprint = i, ProjectName = i.Project.Name }).ToListAsync())
-                .Select(i => i.Sprint.ToEntity().ToViewModel(i.ProjectName)).ToList();
+                .Select(i => i.Sprint.ToEntity().ToViewModel()).ToList();
 
             var totalCount = await query.CountAsync();
 

@@ -14,11 +14,15 @@ namespace Domain.TaskAggregation
         public override async Task<Task> ResolveAndGetEntityAsync(
             IMediator mediator)
         {
-            await InvariantState.AssestAsync(mediator);
-
             var task = (await mediator.Send(
                 new FindTask(Id, includeDeleted: true)))!;
+
+            base.Prepare(task);
+
+            await InvariantState.AssestAsync(mediator);
+
             await base.ResolveAsync(mediator, task);
+
             return task;
         }
     }

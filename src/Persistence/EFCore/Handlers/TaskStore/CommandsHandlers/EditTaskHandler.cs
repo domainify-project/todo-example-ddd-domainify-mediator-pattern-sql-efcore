@@ -27,6 +27,8 @@ namespace Persistence.TaskStore
             if (itemToModify != null)
             {
                 itemToModify.Description = preparedEntity.Description;
+                itemToModify.Status = preparedEntity.Status;
+                itemToModify.SprintId = request.SprintId == null ? null : Guid.Parse(request.SprintId);
             }
 
             return new Unit();

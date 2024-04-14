@@ -3,16 +3,13 @@ using MediatR;
 
 namespace Domain.ProjectSettingAggregation
 {
-    internal class FindSprint :
-        QueryItemRequestById<Sprint, string, Sprint?>
+    internal class FindProjectIdOfSprint :
+        QueryItemRequestById<Sprint, string, string?>
     {
-        public bool WithTasks { get; private set; } = false;
-        public FindSprint(string id,
-            bool withTasks = false,
+        public FindProjectIdOfSprint(string sprintId,
             bool includeDeleted = false,
-            bool preventIfNoEntityWasFound = false) : base(id)
+            bool preventIfNoEntityWasFound = false) : base(sprintId)
         {
-            WithTasks = withTasks;
             IncludeDeleted = includeDeleted;
             PreventIfNoEntityWasFound = preventIfNoEntityWasFound;
         }

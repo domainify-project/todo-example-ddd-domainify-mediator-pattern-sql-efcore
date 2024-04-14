@@ -15,9 +15,14 @@ namespace Domain.ProjectSettingAggregation
             PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;
         }
-        public override async Task ResolveAsync(IMediator mediator)
+
+        public override async Task ResolveAsync(IMediator mediator, Sprint sprint)
         {
+            base.Prepare(sprint);
+
             await InvariantState.AssestAsync(mediator);
+
+            await base.ResolveAsync(mediator, sprint);
         }
     }
 }

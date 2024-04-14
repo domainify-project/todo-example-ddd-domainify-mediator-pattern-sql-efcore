@@ -26,7 +26,7 @@ namespace Persistence
         {
             var dataModel = new TaskModel()
             {
-                Id = new Guid(task.Id),
+                Id = Guid.TryParse(task.Id, out var taskId) ? taskId : Guid.NewGuid(),
                 IsDeleted = task.IsDeleted,
                 ModifiedDate = task.ModifiedDate,
 
@@ -37,14 +37,14 @@ namespace Persistence
             };
 
             if (sprintId != null)
-                dataModel.SprintId = new Guid(sprintId);
+                dataModel.SprintId = Guid.Parse(sprintId);
 
             return dataModel;
         }
 
         public Domain.TaskAggregation.Task ToEntity()
         {
-            var task = Domain.TaskAggregation.Task.NewInstance(ProjectId.ToString(), SprintId?.ToString());
+            var task = Domain.TaskAggregation.Task.NewInstance();
             task.SetId(Id!.ToString());
             task.ModifiedDate = ModifiedDate;
             task.IsDeleted = IsDeleted;

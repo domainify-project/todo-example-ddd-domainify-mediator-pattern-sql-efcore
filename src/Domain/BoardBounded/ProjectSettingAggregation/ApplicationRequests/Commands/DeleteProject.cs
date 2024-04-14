@@ -17,6 +17,8 @@ namespace Domain.ProjectSettingAggregation
             var project = (await mediator.Send(
                 new FindProject(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
 
+            base.Prepare(project);
+
             InvariantState.AddAnInvariantRequest(new PreventIfProjectHasSomeSprints(id: Id));
             InvariantState.AddAnInvariantRequest(new PreventIfProjectHasSomeTasks(id: Id));
             await InvariantState.AssestAsync(mediator);

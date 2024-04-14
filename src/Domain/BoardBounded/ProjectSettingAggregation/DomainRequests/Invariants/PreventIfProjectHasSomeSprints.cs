@@ -13,7 +13,7 @@ namespace Domain.ProjectSettingAggregation
 
         public override IFault? GetFault()
         {
-            return new ProjectHasSomeSprints();
+            return new TheProjectHasSomeSprintsFault();
         }
         public override async Task ResolveAsync(IMediator mediator)
         {

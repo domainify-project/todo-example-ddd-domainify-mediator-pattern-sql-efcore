@@ -63,55 +63,37 @@ namespace Domain.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string AProjectWithThisNameHasAlreadyExisted {
+        internal static string Invariant_SomeTasksHaveBeenDefinedForThisProjectFault {
             get {
-                return ResourceManager.GetString("AProjectWithThisNameHasAlreadyExisted", resourceCulture);
+                return ResourceManager.GetString("Invariant_SomeTasksHaveBeenDefinedForThisProjectFault", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string ASprintWithThisNameOnThisProjectHasAlreadyExisted {
+        internal static string Invariant_SomeTasksHaveBeenDefinedForThisSprintFault {
             get {
-                return ResourceManager.GetString("ASprintWithThisNameOnThisProjectHasAlreadyExisted", resourceCulture);
+                return ResourceManager.GetString("Invariant_SomeTasksHaveBeenDefinedForThisSprintFault", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Invariant_Issue_SomeTasksHaveBeenDefinedForThisProject {
+        internal static string Invariant_TheProjectHasSomeSprintsFault {
             get {
-                return ResourceManager.GetString("Invariant_Issue_SomeTasksHaveBeenDefinedForThisProject", resourceCulture);
+                return ResourceManager.GetString("Invariant_TheProjectHasSomeSprintsFault", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Invariant_Issue_SomeTasksHaveBeenDefinedForThisSprint {
+        internal static string Invariant_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonthsFault {
             get {
-                return ResourceManager.GetString("Invariant_Issue_SomeTasksHaveBeenDefinedForThisSprint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string Invariant_Issue_TheProjectHasSomeSprints {
-            get {
-                return ResourceManager.GetString("Invariant_Issue_TheProjectHasSomeSprints", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string Invariant_Issue_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonths {
-            get {
-                return ResourceManager.GetString("Invariant_Issue_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelve" +
-                        "Months", resourceCulture);
+                return ResourceManager.GetString("Invariant_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonths" +
+                        "Fault", resourceCulture);
             }
         }
         

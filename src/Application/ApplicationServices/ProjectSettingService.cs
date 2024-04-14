@@ -34,7 +34,7 @@ namespace Application
             await _mediator.Send(request);
             await _transaction.SaveChangesAsync(concurrencyCheck: true);
         }
-        public async Task Process(CheckProjectForDeletingPermanently request)
+        public async Task Process(CheckProjectForDeleting request)
         {
             await _mediator.Send(request);
         }
@@ -83,7 +83,7 @@ namespace Application
             await _mediator.Send(request);
             await _transaction.SaveChangesAsync();
         }
-        public async Task Process(CheckSprintForDeletingPermanently request)
+        public async Task Process(CheckSprintForDeleting request)
         {
             await _mediator.Send(request);
             await _transaction.SaveChangesAsync(concurrencyCheck: true);

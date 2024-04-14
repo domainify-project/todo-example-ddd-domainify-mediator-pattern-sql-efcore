@@ -4,12 +4,12 @@ using Domain.Properties;
 
 namespace Domain.ProjectSettingAggregation
 {
-    public class StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths : InvariantFault
+    public class StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonthsFault : InvariantFault
     {
-        public StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonths(
+        public StartDateAndEndDateOfSprintCanNotBeEarlierThanLastTwelveMonthsFault(
             string description = "") : base(outerDescription: description,
                 innerDescription: string.Format(CultureInfo.CurrentCulture,
-                Resource.Invariant_Issue_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonths))
+                Resource.Invariant_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonthsFault))
         {
         }
     }

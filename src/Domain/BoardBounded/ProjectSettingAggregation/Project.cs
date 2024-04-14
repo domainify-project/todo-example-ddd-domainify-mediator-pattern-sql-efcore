@@ -17,15 +17,6 @@ namespace Domain.ProjectSettingAggregation
         public List<Sprint> Sprints { get; set; } = new List<Sprint>();
         public List<TaskAggregation.Task> Tasks { get; set; } = new List<TaskAggregation.Task>();
 
-        public override ConditionProperty<Project>? Uniqueness()
-        {
-            return new ConditionProperty<Project>()
-            {
-                Condition = x => x.Name == Name,
-                Description = Resource.AProjectWithThisNameHasAlreadyExisted
-            };
-        }
-
         public Project ()
         {
             // The version field is used for persisting in a nosql database like MongoDB

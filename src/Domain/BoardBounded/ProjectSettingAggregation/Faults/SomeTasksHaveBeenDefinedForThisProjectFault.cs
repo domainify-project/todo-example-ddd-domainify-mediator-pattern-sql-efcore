@@ -4,13 +4,13 @@ using Domain.Properties;
 
 namespace Domain.ProjectSettingAggregation
 {
-    internal class SomeTasksHaveBeenDefinedForThisProject : InvariantFault
+    internal class SomeTasksHaveBeenDefinedForThisProjectFault : InvariantFault
     {
-        public SomeTasksHaveBeenDefinedForThisProject(
+        public SomeTasksHaveBeenDefinedForThisProjectFault(
             string description = "")
             : base(outerDescription: description,
                 innerDescription: string.Format(CultureInfo.CurrentCulture,
-                Resource.Invariant_Issue_SomeTasksHaveBeenDefinedForThisProject))
+                Resource.Invariant_SomeTasksHaveBeenDefinedForThisProjectFault))
         {
         }
     }

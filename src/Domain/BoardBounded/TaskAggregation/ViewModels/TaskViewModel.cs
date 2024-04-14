@@ -20,5 +20,7 @@ namespace Domain.TaskAggregation
         public TaskStatus Status { get; set; }
         [Display(Name = "Status")]
         public required string StatusName { get; set; }
+
+        public required string Description { get; set; }
     }
 }

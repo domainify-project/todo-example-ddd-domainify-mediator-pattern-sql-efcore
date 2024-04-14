@@ -19,7 +19,7 @@ namespace Persistence.ProjectSettingStore
             DeleteProjectPermanently request,
             CancellationToken cancellationToken)
         {
-            var preparedEntity = await request.ResolveAndGetEntityAsync(_mediator);
+            await request.ResolveAndGetEntityAsync(_mediator);
 
             var itemToModify = await _dbContext.Projects
                 .FirstAsync(p => p.Id == new Guid(request.Id));

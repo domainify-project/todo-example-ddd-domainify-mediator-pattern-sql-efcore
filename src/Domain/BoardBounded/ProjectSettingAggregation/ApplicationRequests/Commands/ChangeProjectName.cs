@@ -22,7 +22,9 @@ namespace Domain.ProjectSettingAggregation
             var project = (await mediator.Send(new FindProject(Id, preventIfNoEntityWasFound: true)))!;
             project.SetName(Name);
 
-            InvariantState.AddAnInvariantRequest(new PreventIfTheSameProjectHasAlreadyExisted(project));
+            base.Prepare(project);
+
+            InvariantState.AddAnInvariantRequest(new PreventIfTheSameProjectHasAlreadyExisted(name: project.Name, projectId: project.Id));
             await InvariantState.AssestAsync(mediator);
  
             await base.ResolveAsync(mediator, project);

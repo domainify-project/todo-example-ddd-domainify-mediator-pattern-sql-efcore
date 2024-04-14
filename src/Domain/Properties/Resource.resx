@@ -117,22 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AProjectWithThisNameHasAlreadyExisted" xml:space="preserve">
+  <data name="Invariant_SomeTasksHaveBeenDefinedForThisProjectFault" xml:space="preserve">
     <value />
   </data>
-  <data name="ASprintWithThisNameOnThisProjectHasAlreadyExisted" xml:space="preserve">
+  <data name="Invariant_SomeTasksHaveBeenDefinedForThisSprintFault" xml:space="preserve">
     <value />
   </data>
-  <data name="Invariant_Issue_SomeTasksHaveBeenDefinedForThisProject" xml:space="preserve">
+  <data name="Invariant_TheProjectHasSomeSprintsFault" xml:space="preserve">
     <value />
   </data>
-  <data name="Invariant_Issue_SomeTasksHaveBeenDefinedForThisSprint" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Invariant_Issue_TheProjectHasSomeSprints" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Invariant_Issue_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonths" xml:space="preserve">
+  <data name="Invariant_TheStartDateAndEndDateOfTheSprintCanNotBeEarlierThanTheLastTwelveMonthsFault" xml:space="preserve">
     <value />
   </data>
   <data name="TaskStatus.Blocked" xml:space="preserve">

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Domainify.Domain;
+using Domain.ProjectSettingAggregation;
 
 namespace Domain.TaskAggregation
 {
@@ -10,9 +11,14 @@ namespace Domain.TaskAggregation
         {
             PreventIfNoEntityWasFound = true;
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
+
+        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator, Task task)
         {
+            base.Prepare(task);
+
             await InvariantState.AssestAsync(mediator);
+
+            await base.ResolveAsync(mediator, task);
         }
     }
 }
