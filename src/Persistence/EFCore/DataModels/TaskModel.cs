@@ -36,8 +36,7 @@ namespace Persistence
                 Status = task.Status,
             };
 
-            if (sprintId != null)
-                dataModel.SprintId = Guid.Parse(sprintId);
+            dataModel.SprintId = Guid.TryParse(sprintId, out var spId) ? spId : null;
 
             return dataModel;
         }
@@ -49,6 +48,7 @@ namespace Persistence
             task.ModifiedDate = ModifiedDate;
             task.IsDeleted = IsDeleted;
 
+            task.SetStatus(Status);
             task.SetDescription(Description);
             return task;
         }

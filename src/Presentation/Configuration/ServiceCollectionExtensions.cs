@@ -29,7 +29,7 @@ namespace Presentation.Configuration
         public static void ConfigureApplicationServices(
             this IServiceCollection services,
             DatabaseSettings databaseSettings,
-            SqlServerSettings sqlServerSettings,
+            SqlServerSettings? sqlServerSettings = null,
             InMemoryDatabaseSettings? inMemoryDatabaseSettings = null)
         {
             //-- Application

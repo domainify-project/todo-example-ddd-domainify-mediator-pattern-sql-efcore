@@ -15,7 +15,8 @@ namespace Domain.TaskAggregation
             IMediator mediator)
         {
             var task = (await mediator.Send(
-                new FindTask(Id, includeDeleted: true)))!;
+                new FindTask(Id, includeDeleted: true,
+                preventIfNoEntityWasFound: true)))!;
 
             base.Prepare(task);
 

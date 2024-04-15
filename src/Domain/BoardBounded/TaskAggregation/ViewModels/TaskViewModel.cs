@@ -1,4 +1,6 @@
-﻿using Domainify.Domain;
+﻿using Domain.Properties;
+using Domainify;
+using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.TaskAggregation
@@ -13,14 +15,28 @@ namespace Domain.TaskAggregation
         public DateTime? ModifiedDate { get; set; }
 
         [Display(Name = "Project")]
-        public required string ProjectName { get; set; }
+        public string ProjectName { get; set; }
  
         [Display(Name = "Sprint")]
         public string? SprintName { get; set; }
         public TaskStatus Status { get; set; }
         [Display(Name = "Status")]
-        public required string StatusName { get; set; }
+        public string StatusName { get; set; }
 
-        public required string Description { get; set; }
+        public string Description { get; set; }
+
+        public TaskViewModel(Task task,
+            string? projectName = "", string? sprintName = null)
+        {
+            ModifiedDate = task.ModifiedDate;
+            IsDeleted = task.IsDeleted;
+            Id = task.Id!;
+            ProjectName = projectName!;
+            SprintName = sprintName;
+            Status = task.Status;
+            StatusName = EnumHelper.GetEnumMemberResourceValue(
+                Resource.ResourceManager, task.Status!);
+            Description = task.Description;
+        }
     }
 }

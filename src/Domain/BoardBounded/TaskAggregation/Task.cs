@@ -44,23 +44,6 @@ namespace Domain.TaskAggregation
             return TaskStatus.NotStarted;
         }
 
-        public TaskViewModel ToViewModel(
-            string? projectName = "", string? sprintName = null)
-        {
-            var viewModel = new TaskViewModel()
-            {
-                ModifiedDate = ModifiedDate,
-                IsDeleted = IsDeleted,
-                Id = Id!,
-                ProjectName = projectName!,
-                SprintName = sprintName,
-                Status = Status,
-                StatusName = EnumHelper.GetEnumMemberResourceValue<TaskStatus>(
-                    Resource.ResourceManager, Status!),
-                Description = Description
-            };
- 
-            return viewModel;
-        }
+
     }
 }

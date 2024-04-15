@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence.ProjectSettingStore
 {
     public class GetProjectHandler :
-        IRequestHandler<GetProject, Project?>
+        IRequestHandler<GetProject, ProjectViewModel?>
     {
         private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
@@ -17,7 +17,7 @@ namespace Persistence.ProjectSettingStore
             _dbContext = dbContext;
         }
 
-        public async Task<Project?> Handle(
+        public async Task<ProjectViewModel?> Handle(
             GetProject request,
             CancellationToken cancellationToken)
         {
@@ -38,7 +38,7 @@ namespace Persistence.ProjectSettingStore
 
             await request.ResolveAsync(_mediator, project!);
 
-            return project;
+            return new ProjectViewModel(project!);
         }
     }
 }

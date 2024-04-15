@@ -36,7 +36,7 @@ namespace Persistence.ProjectSettingStore
                 pageNumber: request.PageNumber, pageSize: request.PageSize);
 
             var retrievedItems = (await query.ToListAsync())
-                .Select(i => i.ToEntity().ToViewModel()).ToList();
+                .Select(i => new ProjectViewModel(i.ToEntity())).ToList();
 
             var totalCount = await query.CountAsync();
 

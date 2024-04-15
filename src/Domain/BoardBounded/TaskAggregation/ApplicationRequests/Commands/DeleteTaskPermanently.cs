@@ -1,6 +1,5 @@
 ﻿using Domainify.Domain;
 using MediatR;
-using System.Threading.Tasks;
 
 namespace Domain.TaskAggregation
 {

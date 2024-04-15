@@ -34,17 +34,5 @@ namespace Domain.ProjectSettingAggregation
 
             return this;
         }
-        public ProjectViewModel ToViewModel()
-        {
-            var viewModel = new ProjectViewModel()
-            {
-                ModifiedDate = ModifiedDate,
-                IsDeleted = IsDeleted,
-                Id = Id!,
-                Name = Name,
-            };
-
-            return viewModel;
-        }
     }
 }

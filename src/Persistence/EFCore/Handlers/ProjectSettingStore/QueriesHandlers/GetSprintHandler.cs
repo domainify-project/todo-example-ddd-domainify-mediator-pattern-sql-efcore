@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence.ProjectSettingStore
 {
     public class GetSprintHandler :
-        IRequestHandler<GetSprint, Sprint?>
+        IRequestHandler<GetSprint, SprintViewModel?>
     {
         private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
@@ -18,7 +18,7 @@ namespace Persistence.ProjectSettingStore
             _dbContext = dbContext;
         }
 
-        public async Task<Sprint?> Handle(
+        public async Task<SprintViewModel?> Handle(
             GetSprint request,
             CancellationToken cancellationToken)
         {
@@ -39,7 +39,7 @@ namespace Persistence.ProjectSettingStore
 
             await request.ResolveAsync(_mediator, sprint!);
 
-            return sprint;
+            return new SprintViewModel(sprint!);
         }
     }
 }

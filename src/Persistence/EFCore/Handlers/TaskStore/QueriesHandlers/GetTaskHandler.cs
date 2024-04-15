@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence.TaskStore
 {
     public class GetTaskHandler :
-        IRequestHandler<GetTask, Domain.TaskAggregation.Task?>
+        IRequestHandler<GetTask, TaskViewModel?>
     {
         private readonly IMediator _mediator;
         private readonly TodoDbContext _dbContext;
@@ -17,11 +17,14 @@ namespace Persistence.TaskStore
             _mediator = mediator;
             _dbContext = dbContext;
         }
-        public async Task<Domain.TaskAggregation.Task?> Handle(
+        public async Task<TaskViewModel?> Handle(
             GetTask request,
             CancellationToken cancellationToken)
         {
-            var query = _dbContext.Tasks.AsNoTracking()
+            var query = _dbContext.Tasks
+                .Include(i => i.Project)
+                .Include(i => i.Sprint!)
+                .AsNoTracking()
                 .Where(i => i.Id == new Guid(request.Id));
 
             if (request.IncludeDeleted == false)
@@ -32,7 +35,9 @@ namespace Persistence.TaskStore
 
             await request.ResolveAsync(_mediator, task!);
 
-            return task;
+            return  new TaskViewModel(task!, 
+                projectName: retrievedItem!.Project.Name,
+                sprintName: retrievedItem.Sprint?.Name) ;
         }
     }
 }

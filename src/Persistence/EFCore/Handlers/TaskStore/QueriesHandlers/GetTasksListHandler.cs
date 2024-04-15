@@ -24,13 +24,20 @@ namespace Persistence.TaskStore
             if (request.IsDeleted == false && request.IncludeDeleted)
                 retrivalDeletationStatus = true;
 
-            var query = _dbContext.Tasks.AsNoTracking().Where(i => i.IsDeleted == retrivalDeletationStatus);
+            var query = _dbContext.Tasks
+                .Include(i => i.Project)
+                .Include(i => i.Sprint!)
+                .AsNoTracking()
+                .Where(i => i.IsDeleted == retrivalDeletationStatus);
 
             query = query.SkipQuery(
                 pageNumber: request.PageNumber, pageSize: request.PageSize);
 
             var retrievedItems = (await query.ToListAsync())
-                .Select(i => i.ToEntity().ToViewModel()).ToList();
+                .Select(i => 
+                new TaskViewModel(i.ToEntity(),
+                projectName: i.Project.Name,
+                sprintName: i.Sprint!.Name)).ToList();
 
             var totalCount = await query.CountAsync();
 
