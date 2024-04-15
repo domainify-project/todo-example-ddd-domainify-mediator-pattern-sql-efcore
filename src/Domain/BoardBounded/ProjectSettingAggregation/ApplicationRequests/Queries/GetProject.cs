@@ -4,7 +4,7 @@ using MediatR;
 namespace Domain.ProjectSettingAggregation
 {
     public class GetProject :
-        QueryItemRequestById<Project, string, Project?>
+        QueryItemRequestById<Project, string, ProjectViewModel?>
     {
         public bool WithSprints { get; private set; } = false;
         public bool WithTasks { get; private set; } = false;

@@ -15,7 +15,8 @@ namespace Domain.ProjectSettingAggregation
             IMediator mediator)
         {
             var project = (await mediator.Send(
-                new FindProject(Id, includeDeleted: true, preventIfNoEntityWasFound: true)))!;
+                new FindProject(Id, includeDeleted: true,
+                preventIfNoEntityWasFound: true)))!;
 
             base.Prepare(project);
 

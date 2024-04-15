@@ -24,5 +24,15 @@ namespace Domain.ProjectSettingAggregation
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
+
+        public SprintViewModel(Sprint sprint)
+        {
+            ModifiedDate = sprint.ModifiedDate;
+            IsDeleted = sprint.IsDeleted;
+            Id = sprint.Id!;
+            Name = sprint.Name;
+            StartDate = sprint.StartDate;
+            EndDate = sprint.EndDate;
+        }
     }
 }

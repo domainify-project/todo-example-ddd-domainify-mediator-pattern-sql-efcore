@@ -14,5 +14,13 @@ namespace Domain.ProjectSettingAggregation
 
         public short Type { get; set; }
         public string Name { get; set; } = string.Empty;
+
+        public ProjectViewModel(Project project)
+        {
+            ModifiedDate = project.ModifiedDate;
+            IsDeleted = project.IsDeleted;
+            Id = project.Id!;
+            Name = project.Name;
+        }
     }
 }

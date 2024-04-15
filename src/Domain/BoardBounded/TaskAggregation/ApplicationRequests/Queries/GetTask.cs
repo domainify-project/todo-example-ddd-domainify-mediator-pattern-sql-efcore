@@ -1,11 +1,10 @@
 ﻿using MediatR;
 using Domainify.Domain;
-using Domain.ProjectSettingAggregation;
 
 namespace Domain.TaskAggregation
 {
     public class GetTask :
-        QueryItemRequestById<Task, string, Task?>
+        QueryItemRequestById<Task, string, TaskViewModel?>
     {
         public GetTask(string id) : base(id)
         {

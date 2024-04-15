@@ -12,7 +12,7 @@ namespace Application
         public static void AddApplicationServices(
             this IServiceCollection services,
             DatabaseSettings databaseSettings,
-            SqlServerSettings sqlServerSettings,
+            SqlServerSettings? sqlServerSettings = null,
             InMemoryDatabaseSettings? inMemoryDatabaseSettings = null)
         {
             services.ConfigureDataStore(
@@ -35,7 +35,7 @@ namespace Application
         private static void ConfigureDataStore(
             this IServiceCollection services,
             DatabaseSettings databaseSettings,
-            SqlServerSettings sqlServerSettings,
+            SqlServerSettings? sqlServerSettings = null,
             InMemoryDatabaseSettings? inMemoryDatabaseSettings = null)
         {
             services.AddScoped<IDbTransaction, TodoDbTransaction>();

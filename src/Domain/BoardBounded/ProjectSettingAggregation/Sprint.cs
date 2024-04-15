@@ -43,20 +43,5 @@ namespace Domain.ProjectSettingAggregation
 
             return this;
         }
-
-        public SprintViewModel ToViewModel()
-        {
-            var viewModel = new SprintViewModel()
-            {
-                ModifiedDate = ModifiedDate,
-                IsDeleted = IsDeleted,
-                Id = Id!,
-                Name = Name,
-                StartDate = StartDate,
-                EndDate = EndDate,
-            };
-
-            return viewModel;
-        }
     }
 }

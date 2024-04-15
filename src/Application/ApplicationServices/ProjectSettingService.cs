@@ -50,7 +50,7 @@ namespace Application
         }
         public async Task<ProjectViewModel?> Process(GetProject request)
         {
-            return (await _mediator.Send(request))!.ToViewModel();
+            return (await _mediator.Send(request))!;
         }
 
         public async Task<PaginatedList<ProjectViewModel>> Process(GetProjectsList request)
@@ -96,7 +96,7 @@ namespace Application
         }
         public async Task<SprintViewModel?> Process(GetSprint request)
         {
-            return (await _mediator.Send(request))!.ToViewModel();
+            return (await _mediator.Send(request))!;
 
         }
 
