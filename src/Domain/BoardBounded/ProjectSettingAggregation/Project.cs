@@ -1,6 +1,5 @@
 ﻿using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
-using Domain.Properties;
 
 namespace Domain.ProjectSettingAggregation
 {

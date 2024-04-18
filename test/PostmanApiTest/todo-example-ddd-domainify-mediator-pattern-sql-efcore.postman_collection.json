@@ -1,0 +1,1360 @@
+{
+	"info": {
+		"_postman_id": "fbc977cd-90ad-4a33-afcb-336e60838e38",
+		"name": "todo-example-ddd-domainify-mediator-pattern-sql-efcore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31564167"
+	},
+	"item": [
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "AddTask.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"    pm.collectionVariables.set(\"taskId\",  pm.response.text());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\": \"{{projectId}}\",\r\n    \"description\": \"Implement the project feature as an application service\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks/{{taskId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks",
+								"{{taskId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/{{projectId}}/Tasks?descriptionSearchKey=&sprintId=&status=",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"{{projectId}}",
+								"Tasks"
+							],
+							"query": [
+								{
+									"key": "descriptionSearchKey",
+									"value": ""
+								},
+								{
+									"key": "sprintId",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList.v1.1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1.1/Projects/{{projectId}}/Tasks?pageNumber=1&pageSize=5&descriptionSearchKey=&sprintId=&status=",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1.1",
+								"Projects",
+								"{{projectId}}",
+								"Tasks"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "descriptionSearchKey",
+									"value": ""
+								},
+								{
+									"key": "sprintId",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTaskStatusItems.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks/GetTaskStatusItems",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks",
+								"GetTaskStatusItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{taskId}}\",\r\n    \"description\": \"Modified: 2Define a new module as the task module.\",\r\n    \"status\": 2,\r\n    \"sprintId\": \"{{sprintId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeTaskStatus.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{taskId}}\",\r\n    \"status\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks/ChangeTaskStatus",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks",
+								"ChangeTaskStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks/Delete/{{taskId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks",
+								"Delete",
+								"{{taskId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks/Restore/{{taskId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks",
+								"Restore",
+								"{{taskId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePermanently.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"    //pm.collectionVariables.set(\"projectId\", null);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Tasks/{{taskId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Tasks",
+								"{{taskId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Define.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"    pm.collectionVariables.set(\"projectId\",  pm.response.text());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Task Borad2\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/{{projectId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"{{projectId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList.v1.1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1.1/Projects?pageNumber=1&pageSize=5",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1.1",
+								"Projects"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeProjectName.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{projectId}}\",\r\n    \"name\": \"Task Borad2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/ChangeName",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"ChangeName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/Delete/{{projectId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"Delete",
+								"{{projectId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/Restore/{{projectId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"Restore",
+								"{{projectId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePermanently.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"    //pm.collectionVariables.set(\"projectId\", null);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/{{projectId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"{{projectId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CheckProjectForDeletingPermanently.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/CheckProjectForDeletingPermanently/{{projectId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"CheckProjectForDeletingPermanently",
+								"{{projectId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sprint",
+			"item": [
+				{
+					"name": "Define.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"    pm.collectionVariables.set(\"sprintId\",  pm.response.text());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// pm.sendRequest({\r",
+									"//     url: pm.globals.get(\"todo-example-domainify-sql-efcore-ur\") + '/Projects',\r",
+									"//     method: 'POST',\r",
+									"//     header: {\r",
+									"//     'Content-Type': 'application/json'\r",
+									"//     },\r",
+									"//     body: {\r",
+									"//     mode: 'raw',\r",
+									"//     raw: JSON.stringify(\r",
+									"// {\r",
+									"//     \"name\": \"Task Manager\"\r",
+									"// }\r",
+									"//     )\r",
+									"//   }\r",
+									"//     }, (error, response) => {\r",
+									"//     if (error) {\r",
+									"//         console.log(error);\r",
+									"//     } else {\r",
+									"//         console.log(response);\r",
+									"//         if(response.code == 201)\r",
+									"//         {\r",
+									"//             let jsonResponse = response.json();\r",
+									"//             pm.collectionVariables.set(\"projectId\", jsonResponse);\r",
+									"//         }\r",
+									"//     }\r",
+									"// });\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectId\": \"{{projectId}}\",\r\n    \"name\": \"Iteration 01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/{{sprintId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"{{sprintId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Projects/{{projectId}}/Sprints",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Projects",
+								"{{projectId}}",
+								"Sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList.v1.1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1.1/Projects/{{projectId}}/Sprints?pageNumber=1&pageSize=5",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1.1",
+								"Projects",
+								"{{projectId}}",
+								"Sprints"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeSprintName.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{sprintId}}\",\r\n    \"name\": \"Iteration 02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/ChangeSprintName",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"ChangeSprintName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeSprintTimeSpan.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{sprintId}}\",\r\n    \"startDate\": \"2023-08-22\",\r\n    \"endDate\": \"2023-08-23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/ChangeSprintTimeSpan",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"ChangeSprintTimeSpan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/Delete/{{sprintId}}?deleteAllRelatedTask=true",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"Delete",
+								"{{sprintId}}"
+							],
+							"query": [
+								{
+									"key": "deleteAllRelatedTask",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/Restore/{{sprintId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"Restore",
+								"{{sprintId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CheckSprintForDeletingPermanently.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{example-xswift-task-management-access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/CheckSprintForDeletingPermanently/{{sprintId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"CheckSprintForDeletingPermanently",
+								"{{sprintId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePermanently.v1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code should be 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"    //pm.collectionVariables.set(\"projectId\", null);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{todo-example-domainify-sql-efcore-url}}/v1/Sprints/{{sprintId}}",
+							"host": [
+								"{{todo-example-domainify-sql-efcore-url}}"
+							],
+							"path": [
+								"v1",
+								"Sprints",
+								"{{sprintId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "projectId",
+			"value": ""
+		},
+		{
+			"key": "sprintId",
+			"value": ""
+		},
+		{
+			"key": "taskId",
+			"value": ""
+		}
+	]
+}
