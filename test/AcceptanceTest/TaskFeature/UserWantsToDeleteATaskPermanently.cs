@@ -40,10 +40,10 @@ namespace AcceptanceTest.TaskFeature
             await service.Process(new DeleteTask(taskId));
 
             // Given
-            var requestToDelete = new DeleteTaskPermanently(taskId);
+            var requestToDeletePermanently = new DeleteTaskPermanently(taskId);
 
             // When
-            Func<System.Threading.Tasks.Task> actualForDeleting = async () => await service.Process(requestToDelete);
+            Func<System.Threading.Tasks.Task> actualForDeletingPermanently = async () => await service.Process(requestToDeletePermanently);
 
             var requestToRestore = new RestoreTask(taskId);
             Func<System.Threading.Tasks.Task> actualForRestoting = async () => await service.Process(requestToRestore);
@@ -52,7 +52,7 @@ namespace AcceptanceTest.TaskFeature
             Func<System.Threading.Tasks.Task> actualForGetting = async () => await service.Process(requestToGet);
 
             // Then
-            await actualForDeleting.Should().NotThrowAsync();
+            await actualForDeletingPermanently.Should().NotThrowAsync();
             await actualForGetting.Should().BeSatisfiedWith<NoEntityWasFoundFault>();
             await actualForRestoting.Should().BeSatisfiedWith<NoEntityWasFoundFault>();
 

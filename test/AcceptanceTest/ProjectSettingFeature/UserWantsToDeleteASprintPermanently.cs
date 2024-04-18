@@ -41,7 +41,7 @@ namespace AcceptanceTest.ProjectSettingFeature
             var requestToDeletePermanently = new DeleteSprintPermanently(sprintId);
 
             // When
-            Func<Task> actualForDeleting = async () => await service.Process(requestToDeletePermanently);
+            Func<Task> actualForDeletingPermanently = async () => await service.Process(requestToDeletePermanently);
 
             var requestToGet = new GetSprint(sprintId);
             Func<Task> actualForGetting = async () => await service.Process(requestToGet);
@@ -51,7 +51,7 @@ namespace AcceptanceTest.ProjectSettingFeature
                 async () => await service.Process(requestToRestore);
 
             // Then
-            await actualForDeleting.Should().NotThrowAsync();
+            await actualForDeletingPermanently.Should().NotThrowAsync();
             await actualForGetting.Should().BeSatisfiedWith<NoEntityWasFoundFault>();
             await actualForRestoting.Should().BeSatisfiedWith<NoEntityWasFoundFault>();
 
