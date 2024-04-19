@@ -1,6 +1,6 @@
 using Contract;
-using Domain.ProjectSettingAggregation;
-using Domain.TaskAggregation;
+using Domain.ProjectSetting;
+using Domain.Task;
 using Domainify.AspMvc;
 using Domainify.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +23,7 @@ namespace Presentation.WebAPI
         public async Task<ActionResult<PaginatedList<TaskViewModel>>> GetList(
             Guid projectId,
             Guid? sprintId = null,
-            Domain.TaskAggregation.TaskStatus? status = null,
+            Domain.Task.TaskStatus? status = null,
             string? descriptionSearchKey = null)
         {
             var request = GetRequest<GetTasksList>();
@@ -35,7 +35,7 @@ namespace Presentation.WebAPI
         public async Task<ActionResult<PaginatedList<TaskViewModel>>> GetList(
             Guid projectId,
             Guid? sprintId = null,
-            Domain.TaskAggregation.TaskStatus? status = null,
+            Domain.Task.TaskStatus? status = null,
             string? descriptionSearchKey = null,
             int? pageNumber = null,
             int? pageSize = null)

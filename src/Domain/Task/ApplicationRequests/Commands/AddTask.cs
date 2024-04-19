@@ -1,0 +1,60 @@
+﻿using Domainify.Domain;
+using MediatR;
+
+namespace Domain.Task
+{
+    public class AddTask
+        : RequestToCreate<Task, string>
+    {
+        public string ProjectId { get; private set; }
+
+        [BindTo(typeof(Task), nameof(Task.Description))]
+        public string Description { get; private set; }
+
+        public string? SprintId { get; private set; }
+        public TaskStatus Status { get; private set; } = Task.GetTaskStatusDefaultValue();
+
+        public AddTask(string projectId,
+            string description, string? sprintId = null)
+        {
+            ProjectId = projectId;
+            Description = description.Trim();
+            SprintId = sprintId;
+
+            ValidationState.Validate();
+        }
+
+        public override async Task<Task> ResolveAndGetEntityAsync(
+            IMediator mediator)
+        {
+
+            var task = Task.New()
+                .SetDescription(Description)
+                .SetStatus(Status);
+
+            base.Prepare(task);
+
+            await InvariantState.AssestAsync(mediator);
+
+            await base.ResolveAsync(mediator, task);
+
+            return task;
+        }
+    }
+
+    public class AddTaskHandler :
+        IRequestHandler<AddTask, string>
+    {
+        private readonly ITaskRepository _repository;
+        public AddTaskHandler(ITaskRepository repository)
+        {
+            _repository = repository;
+        }
+        public async Task<string> Handle(
+            AddTask request,
+            CancellationToken cancellationToken)
+        {
+            return await _repository.Apply(request);
+        }
+    }
+}

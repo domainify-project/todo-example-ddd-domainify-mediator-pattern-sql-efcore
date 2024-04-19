@@ -1,5 +1,5 @@
 using Contract;
-using Domain.ProjectSettingAggregation;
+using Domain.ProjectSetting;
 using Domainify.AspMvc;
 using Domainify.Domain;
 using Microsoft.AspNetCore.Mvc;

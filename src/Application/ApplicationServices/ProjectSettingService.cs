@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Domainify.Domain;
 using Contract;
-using Domain.ProjectSettingAggregation;
+using Domain.ProjectSetting;
 using Persistence;
 
 namespace Application

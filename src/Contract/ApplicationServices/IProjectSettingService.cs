@@ -1,4 +1,4 @@
-﻿using Domain.ProjectSettingAggregation;
+﻿using Domain.ProjectSetting;
 using Domainify.Domain;
 
 namespace Contract

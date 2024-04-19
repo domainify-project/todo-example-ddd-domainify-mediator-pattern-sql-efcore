@@ -1,5 +1,5 @@
 ﻿using Contract;
-using Domain.TaskAggregation;
+using Domain.Task;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using System;

@@ -2,7 +2,7 @@
 using Xunit;
 using System;
 using FluentAssertions;
-using Domain.TaskAggregation;
+using Domain.Task;
 using Contract;
 using Domainify.Domain;
 
