@@ -1,4 +1,6 @@
 ﻿using Contract;
+using Domain.ProjectSetting;
+using Domain.Task;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -22,14 +24,16 @@ namespace Application
 
             // MediatR Registrations
             services.AddMediatR(typeof(ProjectSettingService));
-            services.AddMediatR(typeof(Persistence.ProjectSettingStore.DefineProjectHandler));
-            services.AddMediatR(typeof(Domain.ProjectSettingAggregation.DefineProject));
+            services.AddMediatR(typeof(DefineProjectHandler));
+            services.AddMediatR(typeof(DefineProject));
 
             // Application Services
             services.AddScoped<IProjectSettingService, ProjectSettingService>();
             services.AddScoped<ITaskService, TaskService>();
 
             // Infrastructure Services
+            services.AddScoped<IProjectSettingRepository, ProjectSettingRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
         }
 
         private static void ConfigureDataStore(

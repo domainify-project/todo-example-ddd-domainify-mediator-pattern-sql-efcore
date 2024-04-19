@@ -20,9 +20,9 @@ namespace Persistence
         [Required(AllowEmptyStrings = false)]
         public string Description { get; set; } = string.Empty;
 
-        public Domain.TaskAggregation.TaskStatus Status { get; set; }
+        public Domain.Task.TaskStatus Status { get; set; }
         public static TaskModel InstanceOf(
-            Domain.TaskAggregation.Task task, string projectId, string? sprintId)
+            Domain.Task.Task task, string projectId, string? sprintId)
         {
             var dataModel = new TaskModel()
             {
@@ -41,9 +41,9 @@ namespace Persistence
             return dataModel;
         }
 
-        public Domain.TaskAggregation.Task ToEntity()
+        public Domain.Task.Task ToEntity()
         {
-            var task = Domain.TaskAggregation.Task.NewInstance();
+            var task = Domain.Task.Task.NewInstance();
             task.SetId(Id!.ToString());
             task.ModifiedDate = ModifiedDate;
             task.IsDeleted = IsDeleted;

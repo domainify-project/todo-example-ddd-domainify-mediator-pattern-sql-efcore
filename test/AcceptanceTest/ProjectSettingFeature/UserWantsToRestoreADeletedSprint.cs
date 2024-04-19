@@ -4,7 +4,7 @@ using Xunit;
 using System;
 using FluentAssertions;
 using Contract;
-using Domain.ProjectSettingAggregation;
+using Domain.ProjectSetting;
 
 namespace AcceptanceTest.ProjectSettingFeature
 {

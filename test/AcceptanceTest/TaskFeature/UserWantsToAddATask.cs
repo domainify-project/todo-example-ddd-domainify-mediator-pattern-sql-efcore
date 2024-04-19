@@ -1,6 +1,6 @@
 ﻿using Contract;
-using Domain.ProjectSettingAggregation;
-using Domain.TaskAggregation;
+using Domain.ProjectSetting;
+using Domain.Task;
 using FluentAssertions;
 using FluentAssertions.Common;
 using Microsoft.Extensions.DependencyInjection;

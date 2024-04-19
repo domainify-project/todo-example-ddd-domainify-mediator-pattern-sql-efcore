@@ -1,5 +1,5 @@
 ﻿using Contract;
-using Domain.ProjectSettingAggregation;
+using Domain.ProjectSetting;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using System;

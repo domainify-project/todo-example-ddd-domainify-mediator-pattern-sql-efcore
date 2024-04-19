@@ -1,4 +1,4 @@
-﻿using Domain.TaskAggregation;
+﻿using Domain.Task;
 using Domainify.Domain;
 
 namespace Contract

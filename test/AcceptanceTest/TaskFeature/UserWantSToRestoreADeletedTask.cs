@@ -3,7 +3,7 @@ using Xunit;
 using System;
 using FluentAssertions;
 using Contract;
-using Domain.TaskAggregation;
+using Domain.Task;
 
 namespace AcceptanceTest.TaskFeature
 {
