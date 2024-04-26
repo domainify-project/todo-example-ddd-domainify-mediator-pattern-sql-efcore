@@ -1,13 +1,12 @@
-﻿using Application;
+﻿using Application.IntegrationTest.MockedServices;
 using Contract.InfrastructureServices;
-using Infrastructure.Adapters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Presentation.Configuration;
 using System;
 
-namespace AcceptanceTest
+namespace Application.IntegrationTest
 {
     public abstract class ServiceContext
     {
@@ -16,7 +15,7 @@ namespace AcceptanceTest
         {
             var configuration = new ConfigurationBuilder().
                 AddJsonFile("appsettings.Test.json").Build();
- 
+
             var services = new ServiceCollection();
 
             // Infrastructure Services

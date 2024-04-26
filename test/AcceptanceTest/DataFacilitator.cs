@@ -2,7 +2,6 @@
 using Domain.ProjectSetting;
 using Domain.Task;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Threading.Tasks;
 
 namespace AcceptanceTest

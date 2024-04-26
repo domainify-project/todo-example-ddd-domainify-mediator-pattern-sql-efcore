@@ -1,4 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Contract.InfrastructureServices;
+using Infrastructure.Adapters;
+using Microsoft.OpenApi.Models;
 
 namespace Presentation.WebAPI
 {
@@ -8,6 +10,10 @@ namespace Presentation.WebAPI
             this IServiceCollection services,
             IConfigurationRoot configuration)
         {
+
+            // Infrastructure Services
+            services.AddScoped<IManagementService, ManagementService>();
+
             if (configuration
                 .GetSection("OAuthSetting")
                 .GetSection("RunningWithIdentity").Value == "false")

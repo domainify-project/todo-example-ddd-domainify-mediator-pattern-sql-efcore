@@ -1,6 +1,9 @@
 ﻿using Contract;
+using Contract.InfrastructureServices;
+using Domain;
 using Domain.ProjectSetting;
 using Domain.Task;
+using Infrastructure.Adapters;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -22,18 +25,16 @@ namespace Application
                 sqlServerSettings,
                 inMemoryDatabaseSettings);
 
-            // MediatR Registrations
-            services.AddMediatR(typeof(ProjectSettingService));
-            services.AddMediatR(typeof(DefineProjectHandler));
-            services.AddMediatR(typeof(DefineProject));
-
             // Application Services
             services.AddScoped<IProjectSettingService, ProjectSettingService>();
             services.AddScoped<ITaskService, TaskService>();
 
-            // Infrastructure Services
+            // Persistence Services
             services.AddScoped<IProjectSettingRepository, ProjectSettingRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+
+            // Domain Services
+            services.AddDomainServices();
         }
 
         private static void ConfigureDataStore(
