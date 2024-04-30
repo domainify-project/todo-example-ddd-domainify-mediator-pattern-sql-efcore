@@ -1,4 +1,4 @@
-﻿using Presentation.Configuration;
+﻿using Configuration;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Diagnostics;
 using Presentation.WebAPI;

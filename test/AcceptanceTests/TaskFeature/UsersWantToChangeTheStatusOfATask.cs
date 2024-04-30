@@ -12,7 +12,8 @@ namespace AcceptanceTests.TaskFeature
     /// I want to change the status of a task
     /// So that I should be able to access the task with the new status
     /// </summary>
-    public class UsersWantToChangeTheStatusOfATask : IClassFixture<TaskFixture>
+    public class UsersWantToChangeTheStatusOfATask 
+
     {
         private IServiceScope _serviceScope;
         private readonly TaskFixture _fixture;

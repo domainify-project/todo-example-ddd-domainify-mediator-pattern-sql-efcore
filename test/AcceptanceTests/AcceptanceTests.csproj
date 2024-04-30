@@ -38,6 +38,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Application\Application.csproj" />
-    <ProjectReference Include="..\..\src\Presentation\Configuration\Presentation.Configuration.csproj" />
+    <ProjectReference Include="..\..\src\Configuration\Configuration.csproj" />
   </ItemGroup>
 </Project>

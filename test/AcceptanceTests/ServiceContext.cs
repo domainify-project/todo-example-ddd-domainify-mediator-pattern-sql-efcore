@@ -4,7 +4,7 @@ using Infrastructure.Adapters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
-using Presentation.Configuration;
+using Configuration;
 using System;
 
 namespace AcceptanceTests

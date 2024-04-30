@@ -2,10 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Application;
-using Contract.InfrastructureServices;
-using Infrastructure.Adapters;
 
-namespace Presentation.Configuration
+namespace Configuration
 {
     public static class ServiceCollectionExtensions
     {
