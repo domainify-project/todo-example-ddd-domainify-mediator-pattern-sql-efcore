@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Configuration\Configuration.csproj" />
     <ProjectReference Include="..\..\Contract\Contract.csproj" />
     <ProjectReference Include="..\..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Configuration\Presentation.Configuration.csproj" />
   </ItemGroup>
 
 </Project>
