@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Domainify.Domain;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
-    public class RetrieveTasksIdsListOfTheSprint :
-        QueryListRequest<Task, List<string>> 
+    internal class RetrieveTasksIdsListOfTheSprint :
+        QueryListRequest<Task, List<string>>
     {
         public string SprintId { get; private set; } = string.Empty;
 
@@ -22,23 +22,6 @@ namespace Domain.Task
         public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
         {
             await InvariantState.AssestAsync(mediator);
-        }
-    }
-
-    public class RetrieveTasksIdsListOfTheSprintHandler :
-        IRequestHandler<RetrieveTasksIdsListOfTheSprint, List<string>>
-    {
-        private readonly ITaskRepository _repository;
-        public RetrieveTasksIdsListOfTheSprintHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<List<string>> Handle(
-            RetrieveTasksIdsListOfTheSprint request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

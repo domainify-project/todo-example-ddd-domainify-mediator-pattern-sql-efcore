@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class ChangeProjectName :
         RequestToUpdateById<Project, string>
@@ -29,23 +29,6 @@ namespace Domain.ProjectSetting
  
             await base.ResolveAsync(mediator, project);
             return project;
-        }
-    }
-
-    public class ChangeProjectNameHandler :
-        IRequestHandler<ChangeProjectName>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public ChangeProjectNameHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            ChangeProjectName request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

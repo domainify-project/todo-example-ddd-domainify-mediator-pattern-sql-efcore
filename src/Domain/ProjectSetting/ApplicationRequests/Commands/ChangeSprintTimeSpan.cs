@@ -2,7 +2,7 @@
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class ChangeSprintTimeSpan :
         RequestToUpdateById<Sprint, string>
@@ -45,23 +45,6 @@ namespace Domain.ProjectSetting
             sprint.SetStartDate(StartDate).SetEndDate(EndDate);
             await base.ResolveAsync(mediator, sprint);
             return sprint;
-        }
-    }
-
-    public class ChangeSprintTimeSpanHandler :
-        IRequestHandler<ChangeSprintTimeSpan>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public ChangeSprintTimeSpanHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            ChangeSprintTimeSpan request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

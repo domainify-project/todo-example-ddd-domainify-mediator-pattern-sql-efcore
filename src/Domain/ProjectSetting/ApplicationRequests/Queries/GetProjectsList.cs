@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Domainify.Domain;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class GetProjectsList :
         QueryListRequest<Project, PaginatedList<ProjectViewModel>>
@@ -18,26 +18,9 @@ namespace Domain.ProjectSetting
             WithTasks = withTasks;
             ValidationState.Validate();
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
+        public override async Task ResolveAsync(IMediator mediator)
         {
             await InvariantState.AssestAsync(mediator);
-        }
-    }
-
-    public class GetProjectsListHandler :
-        IRequestHandler<GetProjectsList, PaginatedList<ProjectViewModel>>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public GetProjectsListHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<PaginatedList<ProjectViewModel>> Handle(
-            GetProjectsList request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

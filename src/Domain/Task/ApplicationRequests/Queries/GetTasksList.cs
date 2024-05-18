@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class GetTasksList :
         QueryListRequest<Task, PaginatedList<TaskViewModel>>
@@ -28,23 +28,6 @@ namespace Domain.Task
         public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
         {
             await InvariantState.AssestAsync(mediator);
-        }
-    }
-
-    public class GetTasksListHandler :
-        IRequestHandler<GetTasksList, PaginatedList<TaskViewModel>>
-    {
-        private readonly ITaskRepository _repository;
-        public GetTasksListHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<PaginatedList<TaskViewModel>> Handle(
-            GetTasksList request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

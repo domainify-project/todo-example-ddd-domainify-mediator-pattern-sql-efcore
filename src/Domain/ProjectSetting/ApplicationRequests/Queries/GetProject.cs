@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class GetProject :
         QueryItemRequestById<Project, string, ProjectViewModel?>
@@ -18,30 +18,13 @@ namespace Domain.ProjectSetting
             PreventIfNoEntityWasFound = true;
             IncludeDeleted = includeDeleted;
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator, Project project)
+        public override async Task ResolveAsync(IMediator mediator, Project project)
         {
             base.Prepare(project);
 
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, project);
-        }
-    }
-
-    public class GetProjectHandler :
-    IRequestHandler<GetProject, ProjectViewModel?>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public GetProjectHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<ProjectViewModel?> Handle(
-            GetProject request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

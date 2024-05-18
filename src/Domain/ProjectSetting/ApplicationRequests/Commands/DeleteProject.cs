@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class DeleteProject :
         RequestToDeleteById<Project, string>
@@ -25,23 +25,6 @@ namespace Domain.ProjectSetting
 
             await base.ResolveAsync(mediator, project);
             return project;
-        }
-    }
-
-    public class DeleteProjectHandler :
-    IRequestHandler<DeleteProject>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public DeleteProjectHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            DeleteProject request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using Domainify.Domain;
+﻿using Domain.Properties;
+using Domainify;
+using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class Task : Entity<Task, string>, IAggregateRoot
     {

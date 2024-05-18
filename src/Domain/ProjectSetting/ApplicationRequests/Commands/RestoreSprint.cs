@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class RestoreSprint :
         RequestToRestoreById<Sprint, string>
@@ -30,23 +30,6 @@ namespace Domain.ProjectSetting
             await base.ResolveAsync(mediator, sprint);
 
             return sprint;
-        }
-    }
-
-    public class RestoreSprintHandler :
-    IRequestHandler<RestoreSprint>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public RestoreSprintHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            RestoreSprint request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

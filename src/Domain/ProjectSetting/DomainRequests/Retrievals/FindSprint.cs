@@ -1,9 +1,9 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
-    public class FindSprint :
+    internal class FindSprint :
         QueryItemRequestById<Sprint, string, Sprint?>
     {
         public bool WithTasks { get; private set; } = false;
@@ -16,30 +16,13 @@ namespace Domain.ProjectSetting
             IncludeDeleted = includeDeleted;
             PreventIfNoEntityWasFound = preventIfNoEntityWasFound;
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator, Sprint sprint)
+        public override async Task ResolveAsync(IMediator mediator, Sprint sprint)
         {
             base.Prepare(sprint);
 
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, sprint);
-        }
-    }
-
-    public class FindSprintHandler :
-        IRequestHandler<FindSprint, Sprint?>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public FindSprintHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<Sprint?> Handle(
-            FindSprint request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

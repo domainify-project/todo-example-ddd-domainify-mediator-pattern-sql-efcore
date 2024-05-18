@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class Project : Entity<Project, string>, IAggregateRoot
     {
@@ -14,7 +14,7 @@ namespace Domain.ProjectSetting
         public string Name { get; protected set; } = string.Empty;
 
         public List<Sprint> Sprints { get; set; } = new List<Sprint>();
-        public List<Task.Task> Tasks { get; set; } = new List<Task.Task>();
+        public List<TaskAggregation.Task> Tasks { get; set; } = new List<TaskAggregation.Task>();
 
         public Project ()
         {

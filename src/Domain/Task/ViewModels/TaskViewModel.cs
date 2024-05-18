@@ -3,7 +3,7 @@ using Domainify;
 using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class TaskViewModel : ViewModel, IModifiedViewModel, IDeletableViewModel
     {

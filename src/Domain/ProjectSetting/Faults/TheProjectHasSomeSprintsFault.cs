@@ -2,7 +2,7 @@
 using Domain.Properties;
 using Domainify.Domain;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     internal class TheProjectHasSomeSprintsFault : InvariantFault
     {

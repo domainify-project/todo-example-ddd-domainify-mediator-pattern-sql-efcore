@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class CheckSprintForDeleting :
         RequestToCheckEntityForDeletingById<Sprint, string>
@@ -11,7 +11,7 @@ namespace Domain.ProjectSetting
         {
         }
 
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
+        public override async Task ResolveAsync(IMediator mediator)
         {
             var sprint = (await mediator.Send(
                 new FindSprint(Id,
@@ -24,24 +24,6 @@ namespace Domain.ProjectSetting
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, sprint);
-        }
-    }
-
-    public class CheckProjectForDeletingPermanentlyHandler :
-    IRequestHandler<CheckProjectForDeleting>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public CheckProjectForDeletingPermanentlyHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<Unit> Handle(
-            CheckProjectForDeleting request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

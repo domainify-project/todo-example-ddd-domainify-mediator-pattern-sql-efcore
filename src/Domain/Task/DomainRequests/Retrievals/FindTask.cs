@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Domainify.Domain;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
-    public class FindTask :
+    internal class FindTask :
         QueryItemRequestById<Task, string, Task?>
     {
         public FindTask(string id,
@@ -20,23 +20,6 @@ namespace Domain.Task
             await InvariantState.AssestAsync(mediator);
 
             await base.ResolveAsync(mediator, task);
-        }
-    }
-
-    public class FindTaskHandler :
-        IRequestHandler<FindTask, Task?>
-    {
-        private readonly ITaskRepository _repository;
-        public FindTaskHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<Task?> Handle(
-            FindTask request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }
