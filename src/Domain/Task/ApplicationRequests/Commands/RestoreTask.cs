@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class RestoreTask :
         RequestToRestoreById<Task, string>
@@ -25,23 +25,6 @@ namespace Domain.Task
             await base.ResolveAsync(mediator, task);
 
             return task;
-        }
-    }
-
-    public class RestoreTaskHandler :
-        IRequestHandler<RestoreTask>
-    {
-        private readonly ITaskRepository _repository;
-        public RestoreTaskHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            RestoreTask request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

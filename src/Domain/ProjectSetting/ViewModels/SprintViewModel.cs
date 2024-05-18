@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class SprintViewModel : ViewModel, IModifiedViewModel, IDeletableViewModel
     {

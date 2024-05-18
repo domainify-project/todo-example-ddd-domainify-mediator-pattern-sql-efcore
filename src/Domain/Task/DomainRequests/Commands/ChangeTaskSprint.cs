@@ -1,9 +1,9 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
-    public class ChangeTaskSprint :
+    internal class ChangeTaskSprint :
         RequestToUpdateById<Task, string>
     {
         public string? SprintId { get; private set; }
@@ -25,23 +25,6 @@ namespace Domain.Task
  
             await base.ResolveAsync(mediator, task);
             return task;
-        }
-    }
-
-    public class ChangeTaskSprintHandler :
-        IRequestHandler<ChangeTaskSprint>
-    {
-        private readonly ITaskRepository _repository;
-        public ChangeTaskSprintHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            ChangeTaskSprint request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

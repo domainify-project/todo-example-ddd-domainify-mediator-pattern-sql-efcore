@@ -1,7 +1,8 @@
-﻿using Domainify.Domain;
+﻿using Domain.ProjectSettingAggregation;
+using Domainify.Domain;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class AddTask
         : RequestToCreate<Task, string>
@@ -39,22 +40,6 @@ namespace Domain.Task
             await base.ResolveAsync(mediator, task);
 
             return task;
-        }
-    }
-
-    public class AddTaskHandler :
-        IRequestHandler<AddTask, string>
-    {
-        private readonly ITaskRepository _repository;
-        public AddTaskHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<string> Handle(
-            AddTask request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

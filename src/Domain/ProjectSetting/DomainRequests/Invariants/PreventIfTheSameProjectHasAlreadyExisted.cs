@@ -2,9 +2,9 @@
 using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
-    public class PreventIfTheSameProjectHasAlreadyExisted
+    internal class PreventIfTheSameProjectHasAlreadyExisted
         : InvariantRequest<Project>
     {
         [BindTo(typeof(Project), nameof(Project.Id))]
@@ -22,26 +22,9 @@ namespace Domain.ProjectSetting
             return new AnEntityWithThesePropertiesHasAlreadyExistedFault(
                     typeof(Project).Name, Description);
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
+        public override async Task ResolveAsync(IMediator mediator)
         {
             await InvariantState.AssestAsync(mediator);
-        }
-    }
-
-    public class PreventIfTheSameProjectHasAlreadyExistedHandler :
-        IRequestHandler<PreventIfTheSameProjectHasAlreadyExisted, bool>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public PreventIfTheSameProjectHasAlreadyExistedHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<bool> Handle(
-            PreventIfTheSameProjectHasAlreadyExisted request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

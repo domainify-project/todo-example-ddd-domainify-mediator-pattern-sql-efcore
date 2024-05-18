@@ -2,7 +2,7 @@
 using Domainify.Domain;
 using Contract;
 using Persistence;
-using Domain.Task;
+using Domain.TaskAggregation;
 
 namespace Application
 {

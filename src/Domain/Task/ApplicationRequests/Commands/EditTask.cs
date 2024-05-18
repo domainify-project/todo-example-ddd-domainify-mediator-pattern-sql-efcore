@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class EditTask :
         RequestToUpdateById<Task, string>
@@ -36,23 +36,6 @@ namespace Domain.Task
             await base.ResolveAsync(mediator, task);
 
             return task;
-        }
-    }
-
-    public class EditTaskHandler :
-        IRequestHandler<EditTask>
-    {
-        private readonly ITaskRepository _repository;
-        public EditTaskHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            EditTask request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

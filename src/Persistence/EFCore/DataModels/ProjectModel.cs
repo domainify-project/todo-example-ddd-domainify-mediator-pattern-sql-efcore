@@ -1,5 +1,5 @@
 ﻿
-using Domain.ProjectSetting;
+using Domain.ProjectSettingAggregation;
 using System.ComponentModel.DataAnnotations;
 
 namespace Persistence

@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class Sprint : Entity<Sprint, string>
     {
@@ -15,7 +15,7 @@ namespace Domain.ProjectSetting
 
         public DateTime? EndDate { get; protected set; }
 
-        public List<Task.Task> Tasks { get; set; } = new List<Task.Task>();
+        public List<TaskAggregation.Task> Tasks { get; set; } = new List<TaskAggregation.Task>();
 
 
         public static Sprint NewInstance()

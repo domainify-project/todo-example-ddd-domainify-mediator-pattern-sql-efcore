@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Domainify.Domain;
 using Contract;
-using Domain.ProjectSetting;
+using Domain.ProjectSettingAggregation;
 using Persistence;
-using Contract.InfrastructureServices;
 
 namespace Application
 {
@@ -11,16 +10,13 @@ namespace Application
     {
         private readonly IMediator _mediator;
         private readonly IDbTransaction _transaction;
-        private readonly IManagementService _managementService;
 
         public ProjectSettingService(
             IMediator mediator,
-            IDbTransaction transaction,
-            IManagementService managementService)
+            IDbTransaction transaction)
         {
             _mediator = mediator;
             _transaction = transaction;
-            _managementService = managementService;
         }
         public async Task<string> Process(DefineProject request)
         {
@@ -63,10 +59,6 @@ namespace Application
         }
         public async Task<string> Process(DefineSprint request)
         {
-            await _managementService.Process(
-                            new RequestProjectToBeApproved(
-                                projectId: request.ProjectId));
-
             var id = await _mediator.Send(request);
             await _transaction.SaveChangesAsync();
             return id;

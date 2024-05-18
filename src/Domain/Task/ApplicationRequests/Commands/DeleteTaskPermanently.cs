@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
     public class DeleteTaskPermanently :
         RequestToDeletePermanentlyById<Task, string>
@@ -24,23 +24,6 @@ namespace Domain.Task
             await base.ResolveAsync(mediator, task);
 
             return task;
-        }
-    }
-
-    public class DeleteTaskPermanentlyHandler :
-        IRequestHandler<DeleteTaskPermanently>
-    {
-        private readonly ITaskRepository _repository;
-        public DeleteTaskPermanentlyHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            DeleteTaskPermanently request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

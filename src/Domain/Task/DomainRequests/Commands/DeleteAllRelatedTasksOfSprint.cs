@@ -1,9 +1,9 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.Task
+namespace Domain.TaskAggregation
 {
-    public class DeleteAllRelatedTasksOfSprint :
+    internal class DeleteAllRelatedTasksOfSprint :
         BulkCommandRequest<Task, Unit>
     {
         public string SprintId { get; private set; } = string.Empty;
@@ -28,23 +28,6 @@ namespace Domain.Task
 
             foreach (string taskId in tasksIdsList)
                 await mediator.Send(new DeleteTask(taskId));
-        }
-    }
-
-    public class DeleteAllRelatedTasksOfSprintHandler :
-        IRequestHandler<DeleteAllRelatedTasksOfSprint>
-    {
-        private readonly ITaskRepository _repository;
-        public DeleteAllRelatedTasksOfSprintHandler(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            DeleteAllRelatedTasksOfSprint request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Domain.Task;
+﻿using Domain.TaskAggregation;
 using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class DeleteProjectPermanently :
         RequestToDeletePermanentlyById<Project, string>
@@ -27,23 +27,6 @@ namespace Domain.ProjectSetting
             await base.ResolveAsync(mediator, project);
 
             return project;
-        }
-    }
-
-    public class DeleteProjectPermanentlyHandler :
-    IRequestHandler<DeleteProjectPermanently>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public DeleteProjectPermanentlyHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<Unit> Handle(
-            DeleteProjectPermanently request,
-            CancellationToken cancellationToken)
-        {
-            await _repository.Apply(request);
-            return new Unit();
         }
     }
 }

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Domainify.AspMvc;
 using Contract;
 using Domainify.Domain;
-using Domain.ProjectSetting;
+using Domain.ProjectSettingAggregation;
 
 namespace Presentation.WebAPI
 {

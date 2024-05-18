@@ -2,7 +2,7 @@
 using System.Globalization;
 using Domain.Properties;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     internal class SomeTasksHaveBeenDefinedForThisSprintFault : InvariantFault
     {

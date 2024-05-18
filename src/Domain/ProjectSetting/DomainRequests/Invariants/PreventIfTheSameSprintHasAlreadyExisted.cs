@@ -2,9 +2,9 @@
 using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
-    public class PreventIfTheSameSprintHasAlreadyExisted
+    internal class PreventIfTheSameSprintHasAlreadyExisted
         : InvariantRequest<Sprint>
     {
         [BindTo(typeof(Project), nameof(Project.Id))]
@@ -30,26 +30,9 @@ namespace Domain.ProjectSetting
             return new AnEntityWithThesePropertiesHasAlreadyExistedFault(
                     typeof(Sprint).Name, Description);
         }
-        public override async System.Threading.Tasks.Task ResolveAsync(IMediator mediator)
+        public override async Task ResolveAsync(IMediator mediator)
         {
             await InvariantState.AssestAsync(mediator);
-        }
-    }
-
-    public class PreventIfTheSameSprintHasAlreadyExistedHandler :
-        IRequestHandler<PreventIfTheSameSprintHasAlreadyExisted, bool>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public PreventIfTheSameSprintHasAlreadyExistedHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<bool> Handle(
-            PreventIfTheSameSprintHasAlreadyExisted request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }

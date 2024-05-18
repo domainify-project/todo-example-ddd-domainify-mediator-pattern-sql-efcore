@@ -1,7 +1,7 @@
 ﻿using Domainify.Domain;
 using MediatR;
 
-namespace Domain.ProjectSetting
+namespace Domain.ProjectSettingAggregation
 {
     public class DefineSprint
         : RequestToCreate<Sprint, string>
@@ -31,22 +31,6 @@ namespace Domain.ProjectSetting
 
             await base.ResolveAsync(mediator, sprint);
             return sprint;
-        }
-    }
-
-    public class DefineSprintHandler :
-        IRequestHandler<DefineSprint, string>
-    {
-        private readonly IProjectSettingRepository _repository;
-        public DefineSprintHandler(IProjectSettingRepository repository)
-        {
-            _repository = repository;
-        }
-        public async Task<string> Handle(
-            DefineSprint request,
-            CancellationToken cancellationToken)
-        {
-            return await _repository.Apply(request);
         }
     }
 }
